@@ -22,8 +22,10 @@ B = Field(lambda : 0)
 electron = Particle(np.array([0,0,0]), np.array([0,0,0]), 9.10938291e-31, 1.60217657e-19)
 
 comput = Computer()
-comput.start(E, B, electron, 0, 10)
+comput.start(E, B, electron, 0, 1)
 
+
+print(electron.getTrajectory())
 
 r = Drawer(electron.getTrajectory())
 r.Draw()

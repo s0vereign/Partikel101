@@ -41,17 +41,15 @@ class Drawer:
         z = [];        
         
         fig = plt.figure();
-        for i in range(len(self.r)):
+        for i in self.r:
             
-            vh = self.r[i];
-            
-            x.append(vh[1]);
-            y.append(vh[2]);
-            z.append(vh[3]);
+            x.append(i[0]);
+            y.append(i[1]);
+            z.append(i[2]);
                       
-        ax = fig.gca(projection='3d');
-        ax.plot(x,y,z,label = 'Tajectory');
-        ax.legend();
+        #ax = fig.gca(projection='3d');
+        plt.plot(x,y,z,label = 'Tajectory');
+        plt.legend();
         plt.show()
             
             
