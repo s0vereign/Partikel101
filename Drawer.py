@@ -11,7 +11,7 @@ from scipy import numpy as np
 class Drawer:
     
     
-    r = [];
+    r = np.array();
     x = [];    
     y = [];
     z = [];    
