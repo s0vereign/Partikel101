@@ -32,11 +32,7 @@ class Particle:
     def getR0(self):
         """Returns the position of the particle at the beginning (t=0)
         """
-        return self.r0;
-    
-
-    r = np.array(([0,0,0]));
-    v = np.array([0,0,0]);    
+        return self.r0  
     
     
     def return_r():
@@ -83,18 +79,6 @@ class Particle:
     def getTrajectory(self):
         """Returns the list of positions (= the trajectory)
         """
-<<<<<<< HEAD
+
         return self.r;
->>>>>>> 765aeb77b860e67d3806478eea67deeb8202067f
         
-        
-    def return_v():
-    #Onley to return the velocity Vector    
-        return v;
-        
-    def getinitals(r0)
-        
-        
-=======
-        return self.r;
->>>>>>> 673b3a21dcd8819d9e37d2935da2e295ff63fd9d
