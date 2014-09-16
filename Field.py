@@ -44,7 +44,7 @@ class Field:
         
         """
         
-        return np.array([1,1,1])
+        return np.array(self.field(r[0], r[1], r[2], t))
         
         
     
