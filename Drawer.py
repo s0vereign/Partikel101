@@ -6,8 +6,11 @@ Created on Mon Sep 15 16:29:15 2014
 """
 
 
+import matplotlib as mpl
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 import matplotlib.pyplot as plt
+
 class Drawer:
     
     
@@ -36,11 +39,14 @@ class Drawer:
         
         """
         
+        fig = plt.figure();
+        ax = fig.gca(projection='3d')
+        
         x = [];
         y = [];
         z = [];        
         
-        fig = plt.figure();
+        
         for i in self.r:
             
             x.append(i[0]);
@@ -48,8 +54,8 @@ class Drawer:
             z.append(i[2]);
                       
         #ax = fig.gca(projection='3d');
-        plt.plot(x,y,z,label = 'Tajectory');
-        plt.legend();
+        ax.plot(x,y,z,label = 'Tajectory');
+        ax.legend();
         plt.show()
             
             
