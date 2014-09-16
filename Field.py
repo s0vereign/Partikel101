@@ -14,31 +14,40 @@ import matplotlib as mp
 import numpy as np
 
 class Field:
-<<<<<<< HEAD
-    #@Override
-        
-    def __init__ Field(self):
-        
-        
-        
 
-    def returnfied(x,y,z,t):
-        
-        
-=======
     
     def __init__(self, f):
-        self.field = f;
         
->>>>>>> 765aeb77b860e67d3806478eea67deeb8202067f
-    #@Override
-    def returnField(self, x,y,z,t):
-        return self.field;
+        """
+            initalizes with a Function
+            this feature will be implemented later
+        """
         
         
-    #@Override
-    def calcField(self, x,y,z,t):
-        return self.field(x,y,z,t);
+       self.field = f;
+        
+    
+    def returnField(self,r,t):
+        
+        """
+            This Function returns the Force vector
+            @r and the time t            
+            
+            
+        """        
+        
+        
+        return calcField(self,r,t);
+        
+        
+    def calcField(self,r,t):
+        """
+            This Function Calculates the Force Vector
+            on given r and time
+        
+        """
+        
+        return np.array([1,1,1])
         
         
     
