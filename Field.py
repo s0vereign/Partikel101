@@ -23,18 +23,6 @@ class Field:
             this feature will be implemented later
         """
         self.field = f;
-    
-    def returnField(self, r,t):
-        
-        """
-            This Function returns the Force vector
-            @r and the time t            
-            
-            
-        """        
-        
-        
-        return self.calcField(r,t);
         
         
     def calcField(self, r,t):
