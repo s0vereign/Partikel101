@@ -12,14 +12,18 @@ vector. calcfield calculates the field
 import SciPy
 
 class Field:
-    #@Override
-    def returnfied(x,y,z,t):
+    
+    def __init__(self, f):
+        self.field = f;
         
-        return 0
     #@Override
-    def calcfield(x,y,z,t):
+    def returnField(self, x,y,z,t):
+        return self.field;
         
-        return 0
+        
+    #@Override
+    def calcField(self, x,y,z,t):
+        return self.field(x,y,z,t);
         
         
     
