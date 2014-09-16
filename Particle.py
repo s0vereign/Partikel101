@@ -14,15 +14,14 @@ class Particle:
     def __init__(self, 
                  r0 = np.array([0,0,0]),
                  v0 = np.array([0,0,0]),
-                 v = np.array([0,0,0]),
                  m = 0,
                  q = 0):
         """Initialise all relevant properties.
         """
         self.r0 = r0;
         self.v0 = v0;
-        self.v = v;
-        self.r = [];
+        self.v = v0;
+        self.r = [r0];
         self.m = m;
         self.q = q;
            

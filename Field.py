@@ -24,7 +24,7 @@ class Field:
         """
         self.field = f;
     
-    def returnField(r,t):
+    def returnField(self, r,t):
         
         """
             This Function returns the Force vector
@@ -37,7 +37,7 @@ class Field:
         return self.calcField(r,t);
         
         
-    def calcField(r,t):
+    def calcField(self, r,t):
         """
             This Function Calculates the Force Vector
             on given r and time
