@@ -18,36 +18,28 @@ class Particle:
                  q = 0):
         """Initialise all relevant properties.
         """
-        self.r0 = r0;
-        self.v0 = v0;
         self.v = v0;
         self.r = [r0];
+        self.a = 0;
         self.m = m;
         self.q = q;
            
     def returnall():
         pass
-        
-    def getR0(self):
-        """Returns the position of the particle at the beginning (t=0)
-        """
-        return self.r0  
-    
     
     def return_r():
     #Only to return a numpy Vector    
         return r;        
-
-
-    def getV0(self):
-        """Returns the velocity of the particle
-        """
-        return self.v0;
     
     def getV(self):
         """Returns the current velocity of the particle
         """
         return self.v;
+    
+    def getA(self):
+        """Returns current acceleration
+        """
+        return self.a;
     
     def getM(self):
         """Returns the mass of the particle
@@ -74,6 +66,11 @@ class Particle:
         """ Updates current velocity
         """
         self.v = v;
+        
+    def setA(self, a):
+        """Updates the particle's current acceleration
+        """
+        self.a = a;
         
     def getTrajectory(self):
         """Returns the list of positions (= the trajectory)

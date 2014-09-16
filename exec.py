@@ -17,8 +17,20 @@ from Drawer   import Drawer
 from Particle import Particle
 from Field    import Field
 
-E = Field(lambda : 0)
-B = Field(lambda : 0)
+def E_Feld(x,y,z, t):
+    Ex = 0;
+    Ey = 0;
+    Ez = 0;
+    return [Ex, Ey, Ez];
+
+def B_Feld(x,y,z, t):
+    Bx = 0;
+    By = 0;
+    Bz = 1;
+    return [Bx, By, Bz];
+
+E = Field(E_Feld)
+B = Field(B_Feld)
 electron = Particle(np.array([0,0,0]), np.array([0,0,0]), 9.10938291e-31, 1.60217657e-19)
 
 comput = Computer()

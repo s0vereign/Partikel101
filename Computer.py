@@ -6,7 +6,6 @@ Created on Mon Sep 15 16:29:43 2014
 """
 
 import numpy as np
-import scipy.integrate as intg
 
 class Computer:
     
@@ -15,8 +14,31 @@ class Computer:
         self.c = 299792458 # m/s
     
     def step(self, E, B, particle, t):
+        F = particle.getQ() * (
+                E.calcField( particle.getCurrentPos(), t ) + 
+                    np.cross(
+                        particle.getV(),
+                        B.calcField( particle.getCurrentPos(), t)
+                    )
+            );
+        gamma = 1 / np.sqrt(1 - particle.getM()**2 / self.c**2)
+        a = F / (particle.getM() * gamma);
         
-        #compute lorentz-force: F = q(E + v x B)
+        #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
+        r = particle.getCurrentPos() + particle.getV() * self.dt + 1.0/2 * a * self.dt**2
+        v = particle.getV() + 1 / 2.0 ( particle.getA() + a ) * self.dt
+        
+        particle.addPos(r);
+        particle.setV(v);
+        particle.setA(a);
+        
+        
+    def start(self, E, B, particle, start, end):
+        for t in np.arange(start, end, self.dt):
+            self.step(E, B, particle, t)
+            
+'''
+#compute lorentz-force: F = q(E + v x B)
         F = lambda t, E, B, particle, direction: np.dot(
                     particle.getQ() * (
                         E.calcField( particle.getCurrentPos(), t ) + 
@@ -48,7 +70,4 @@ class Computer:
     
     def integrate(self, F, start, end, arg):
         return intg.quad(F, start, end, args = arg)
-        
-    def start(self, E, B, particle, start, end):
-        for t in np.arange(start, end, self.dt):
-            self.step(E, B, particle, t)
+'''
