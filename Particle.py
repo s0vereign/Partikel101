@@ -14,6 +14,8 @@ class Particle:
                  v = np.array([0,0,0]),
                  m = 0,
                  q = 0):
+        """Initialise all relevant properties.
+        """
         self.r0 = r0;
         self.v0 = v0;
         self.v = v;
@@ -25,6 +27,8 @@ class Particle:
         pass
         
     def getR0(self):
+        """Returns the position of the particle at the beginning (t=0)
+        """
         return self.r0;
     
     def getV0(self):
