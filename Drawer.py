@@ -33,6 +33,11 @@ class Drawer:
         r = t; 
         
     def Draw():
+        """        
+        Draws the calculated trajectory
+        
+        
+        """
         
         fig = plt.figure();
         for i in range(len(r)):

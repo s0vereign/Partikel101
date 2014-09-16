@@ -82,3 +82,6 @@ class Particle:
 
         return self.r;
         
+        
+p = Particle([0,0,0],[0,0,0],[0,0,0],0,0);
+        
