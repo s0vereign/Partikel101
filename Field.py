@@ -9,13 +9,21 @@ vector. calcfield calculates the field
 
 """
 
-import SciPy
+import scipy as sc
+import matplotlib as mp
+import numpy as np
 
 class Field:
     #@Override
+        
+    def __init__ Field(self):
+        
+        
+        
+
     def returnfied(x,y,z,t):
         
-        return 0
+        
     #@Override
     def calcfield(x,y,z,t):
         
