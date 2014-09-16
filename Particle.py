@@ -8,6 +8,9 @@ Created on Mon Sep 15 16:26:04 2014
 import numpy as np
 
 class Particle:
+    """Particle contains importent properties and methods for 
+       describing a particle
+    """
     def __init__(self, 
                  r0 = np.array([0,0,0]),
                  v0 = np.array([0,0,0]),
@@ -50,6 +53,11 @@ class Particle:
         """Returns the charge (in coulombs) of the particle
         """
         return self.q;
+        
+    def getCurrentPos(self):
+        """Returns current position (last entry of trajectory-list)
+        """
+        return self.r[-1::1].pop()
     
     def addPos(self, r):
         """ Adds a position to the list of positions (= the trajectory).
@@ -66,8 +74,3 @@ class Particle:
         """Returns the list of positions (= the trajectory)
         """
         return self.r;
-        
-        
-        
-        
-        
