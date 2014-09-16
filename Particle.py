@@ -31,7 +31,7 @@ class Particle:
         """
         return self.r0;
     
-<<<<<<< HEAD
+
     r = np.array(([0,0,0]));
     v = np.array([0,0,0]);    
     
@@ -39,7 +39,8 @@ class Particle:
     def return_r():
     #Only to return a numpy Vector    
         return r;        
-=======
+
+
     def getV0(self):
         """Returns the velocity of the particle
         """
