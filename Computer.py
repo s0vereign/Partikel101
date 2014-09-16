@@ -31,7 +31,7 @@ class Computer:
         particle.addPos(r);
         particle.setV(v);
         particle.setA(a);
-        print(F)
+       
         
     def start(self, E, B, particle, start, end):
         for t in np.arange(start, end, self.dt):

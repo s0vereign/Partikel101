@@ -18,23 +18,23 @@ from Particle import Particle
 from Field    import Field
 
 def E_Feld(x,y,z, t):
-    Ex = 7;
-    Ey = 6;
-    Ez = 6;
+    Ex = 1;
+    Ey = 0;
+    Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-    Bx = 2;
-    By = 3;
+    Bx = 0;
+    By = 1;
     Bz = 0;
     return [Bx, By, Bz];
 
 E = Field(E_Feld)
 B = Field(B_Feld)
-electron = Particle(np.array([10,0,0]), np.array([1,1,1]), 1, 1)
+electron = Particle(np.array([0,0,0]), np.array([1,0,0]), 1, 1)
 
-comput = Computer(0.02)
-comput.start(E, B, electron, 0, 1000)
+comput = Computer()
+comput.start(E, B, electron, 0, 30)
 
 
 #print(electron.getTrajectory())
