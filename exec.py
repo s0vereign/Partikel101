@@ -9,7 +9,7 @@ Created on Tue Sep 16 11:02:26 2014
 
 
 """
-
+from __future__ import division
 import numpy as np
 
 from Computer import Computer
@@ -26,18 +26,18 @@ def E_Feld(x,y,z, t):
 def B_Feld(x,y,z, t):
     Bx = 0;
     By = 0;
-    Bz = 1;
+    Bz = 0;
     return [Bx, By, Bz];
 
 E = Field(E_Feld)
 B = Field(B_Feld)
-electron = Particle(np.array([0,0,0]), np.array([0,0,0]), 9.10938291e-31, 1.60217657e-19)
+electron = Particle(np.array([0,0,0]), np.array([100,0,0]), 1, 1)
 
-comput = Computer()
-comput.start(E, B, electron, 0, 1)
+comput = Computer(0.02)
+comput.start(E, B, electron, 0, 10)
 
 
-print(electron.getTrajectory())
+#print(electron.getTrajectory())
 
 r = Drawer(electron.getTrajectory())
 r.Draw()
