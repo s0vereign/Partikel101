@@ -5,7 +5,7 @@ Created on Mon Sep 15 16:29:15 2014
 @author: max
 """
 
-from __future__ import division
+
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np

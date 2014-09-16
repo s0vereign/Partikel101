@@ -4,7 +4,7 @@ Created on Mon Sep 15 16:29:43 2014
 
 @author: max
 """
-from __future__ import division
+
 import numpy as np
 
 class Computer:
@@ -31,7 +31,7 @@ class Computer:
         particle.addPos(r);
         particle.setV(v);
         particle.setA(a);
-        
+        print(F)
         
     def start(self, E, B, particle, start, end):
         for t in np.arange(start, end, self.dt):
