@@ -14,8 +14,8 @@ class Particle:
     def __init__(self, 
                  r0 = np.array([0,0,0]),
                  v0 = np.array([0,0,0]),
-                 m = 0,
-                 q = 0):
+                 m = 1,
+                 q = 1):
         """Initialise all relevant properties.
         """
         self.v = v0;
@@ -23,13 +23,6 @@ class Particle:
         self.a = 0;
         self.m = m;
         self.q = q;
-           
-    def returnall():
-        pass
-    
-    def return_r():
-    #Only to return a numpy Vector    
-        return r;        
     
     def getV(self):
         """Returns the current velocity of the particle
