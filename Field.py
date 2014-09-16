@@ -16,18 +16,15 @@ import numpy as np
 class Field:
 
     
-    def __init__(self, f):
+    def __init__(self,f):
         
         """
             initalizes with a Function
             this feature will be implemented later
         """
-        
-        
-       self.field = f;
-        
+        self.field = f;
     
-    def returnField(self,r,t):
+    def returnField(r,t):
         
         """
             This Function returns the Force vector
@@ -37,10 +34,10 @@ class Field:
         """        
         
         
-        return calcField(self,r,t);
+        return self.calcField(r,t);
         
         
-    def calcField(self,r,t):
+    def calcField(r,t):
         """
             This Function Calculates the Force Vector
             on given r and time

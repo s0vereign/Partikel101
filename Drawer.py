@@ -6,22 +6,19 @@ Created on Mon Sep 15 16:29:15 2014
 """
 
 
-import matplotlib as mp
-from scipy import numpy as np
+import numpy as np
+import matplotlib.pyplot as plt
 class Drawer:
     
     
-    r = np.array();
-    x = [];    
-    y = [];
-    z = [];    
+     
     
-    def __init__(self):
+    def __init__(self,r):
     
-        pass;
+        self.r = r;
+           
     
-    
-    def setTraj(t):
+    def setTraj(self,t):
         
         """
         Gets a Array of R^3 Vectors
@@ -30,19 +27,23 @@ class Drawer:
                     
         """
         
-        r = t; 
+        self.r = t; 
         
-    def Draw():
+    def Draw(self):
         """        
         Draws the calculated trajectory
         
         
         """
         
+        x = [];
+        y = [];
+        z = [];        
+        
         fig = plt.figure();
-        for i in range(len(r)):
+        for i in range(len(self.r)):
             
-            vh = r[i];
+            vh = self.r[i];
             
             x.append(vh[1]);
             y.append(vh[2]);
