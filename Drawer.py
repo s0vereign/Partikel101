@@ -5,7 +5,11 @@ Created on Mon Sep 15 16:29:15 2014
 @author: max
 """
 
+
 from __future__ import division
+import matplotlib as mpl
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
 import matplotlib.pyplot as plt
 
 class Drawer:
@@ -13,9 +17,11 @@ class Drawer:
     
      
     
-    def __init__(self,r):
+    def __init__(self,r,v):
     
         self.r = r;
+        self.v = v;        
+        
         
     def Draw(self):
         """        
@@ -42,6 +48,17 @@ class Drawer:
         ax.plot(x,y,z,label = 'Tajectory');
         ax.legend();
         plt.show()
-            
+        
+        
+    def Draw_Ekin(self,ekin,t_start,t_end,dt):   
+         
+         
+             t =  np.arange(t_start,t_end,dt);
+             plt.title('PLotting the Kinetic Energy');
+             plt.plot(t,ekin);
+             plt.ylabel('Kinetic Energy [eV]');
+             plt.xlabel('Time');
+             plt.show();
             
         
+    
