@@ -51,8 +51,6 @@ class Drawer:
          
          
              t =  np.arange(t_start,t_end,dt);
-             print(len(t))
-             print(len(ekin))
              plt.title('PLotting the Kinetic Energy');
              plt.plot(t,ekin);
              plt.ylabel('Kinetic Energy [eV]');

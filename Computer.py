@@ -35,5 +35,7 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-        for t in np.arange(start, end, self.dt):
-            self.step(E, B, particle, t)
+        for i in range(start, end):
+            for t in np.arange(i, i+1, self.dt):
+                self.step(E, B, particle, t)
+            print("{:5.1f} %".format((i+1)/end*100))
