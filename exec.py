@@ -18,14 +18,15 @@ from Particle import Particle
 from Field    import Field
 
 def E_Feld(x,y,z, t):
-
     Ex = 1;
     Ey = 0;
     Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-  
+"""
+This function provied
+"""    
     
     Bx = 0;
     By = 0;

@@ -51,6 +51,7 @@ class Drawer:
         
         
     def Draw_Ekin(self,ekin,t_start,t_end,dt):   
+                 
          
          
              t =  np.arange(t_start,t_end,dt);
@@ -61,4 +62,6 @@ class Drawer:
              plt.show();
             
         
-    
+    """
+    Draws the kinetic Energy 
+    """
