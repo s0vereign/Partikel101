@@ -20,8 +20,10 @@ class Particle:
                  q = 1):
         """Initialise all relevant properties.
         """
-        self.v = [v0];
-        self.r = [r0];
+        self.v0 = v0;
+        self.r0 = r0;
+        self.v = [];
+        self.r = [];
         self.a = 0;
         self.m = m;
         self.q = q;
@@ -30,7 +32,7 @@ class Particle:
         """Returns the current velocity of the particle (last entry of all
            tracked velocities)
         """
-        return self.v[-1::1].pop();
+        return self.v[-1::1].pop() if self.v[-1::1] else self.v0;
     
     def getA(self):
         """Returns current acceleration
@@ -50,7 +52,7 @@ class Particle:
     def getCurrentPos(self):
         """Returns current position (last entry of trajectory-list)
         """
-        return self.r[-1::1].pop()
+        return self.r[-1::1].pop() if self.r[-1::1] else self.r0
     
     def addPos(self, r):
         """ Adds a position to the list of positions (= the trajectory).
@@ -79,7 +81,7 @@ class Particle:
         """
         return self.v;
         
-    def getKineticEnergies(self, factor = 1, electronVolt = True):
+    def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: electron volts (alternative: Joule)
            with any factor (e.g. factor = 10^6 = 1M -> Megaelectron volts/Joule)
         """
