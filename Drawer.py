@@ -47,10 +47,9 @@ class Drawer:
         plt.show()
         
     def DrawKineticEnergy(self,ekin,t_start,t_end,dt):   
-         
              
              t =  np.arange(t_start,t_end,dt);
-             plt.title('PLotting the Kinetic Energy');
+             plt.title('Plotting the Kinetic Energy');
              plt.plot(t,ekin);
              plt.ylabel('Kinetic Energy [eV]');
              plt.xlabel('Time');
