@@ -79,14 +79,19 @@ class Particle:
     def getVelocities(self):
         """Returns all available velocities
         """
-        return self.v;
+        return [np.linalg.norm(v) for v in self.v];
         
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: electron volts (alternative: Joule)
            with any factor (e.g. factor = 10^6 = 1M -> Megaelectron volts/Joule)
         """
+<<<<<<< HEAD
         AbsVector = lambda vVec: np.linalg.norm(vVec);
         EkinJoule = lambda v: (1 / np.sqrt(1 - AbsVector(v)**2 / Constants.c**2) ) * self.m * Constants.c**2;
+=======
+        AbsVector = lambda vVec: np.sqrt(vVec[0]**2 + vVec[1]**2 + vVec[2]**2);
+        EkinJoule = lambda v: (1 / np.sqrt(1 - AbsVector(v)**2 / Constants.c**2) - 1) * self.m * Constants.c**2;
+>>>>>>> e72b31e97c982243d63772b82dd61a670c0bc94a
         if electronVolt:
             return [ EkinJoule(v) / Constants.e / factor for v in self.v] # Ekin in eV
         else:
