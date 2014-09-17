@@ -18,17 +18,19 @@ from Particle import Particle
 from Field    import Field
 
 def E_Feld(x,y,z, t):
+
     Ex = 1;
     Ey = 0;
     Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
+  
+    
     Bx = 0;
-    By = 1;
-    Bz = 0;
     By = 0;
-    Bz = 1;
+    Bz = 0;
+    
     return [Bx, By, Bz];
 
 E = Field(E_Feld)

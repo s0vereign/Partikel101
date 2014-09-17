@@ -6,11 +6,10 @@ Created on Mon Sep 15 16:29:15 2014
 """
 
 
-
+from __future__ import division
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
-from __future__ import division
 import matplotlib.pyplot as plt
 
 class Drawer:
@@ -51,15 +50,15 @@ class Drawer:
         plt.show()
         
         
-     def Draw_Ekin(self,ekin,t_start,t_end,dt):   
+    def Draw_Ekin(self,ekin,t_start,t_end,dt):   
          
          
-         t =  np.arange(t_start,t_end,dt);
-         plt.title('PLotting the Kinetic Energy');
-         plt.plot(t,ekin);
-         plt.ylabel('Kinetic Energy [J]');
-         plt.xlabel('Time');
-         plt.show();
+             t =  np.arange(t_start,t_end,dt);
+             plt.title('PLotting the Kinetic Energy');
+             plt.plot(t,ekin);
+             plt.ylabel('Kinetic Energy [eV]');
+             plt.xlabel('Time');
+             plt.show();
             
         
     
