@@ -25,28 +25,22 @@ def E_Feld(x,y,z, t):
 
 def B_Feld(x,y,z, t):
     Bx = 0;
-<<<<<<< HEAD
     By = 1;
     Bz = 0;
-=======
     By = 0;
     Bz = 1;
->>>>>>> ad1e2ca3f4610892f9b0c614c10268bcfc4dd461
     return [Bx, By, Bz];
 
 E = Field(E_Feld)
 B = Field(B_Feld)
-<<<<<<< HEAD
 electron = Particle(np.array([0,0,0]), np.array([1,0,0]), 1, 1)
 
 comput = Computer()
 comput.start(E, B, electron, 0, 30)
-=======
 particle = Particle(np.array([0,0,0]), np.array([1,0,0]), 1, 1)
 
 comput = Computer()
 comput.start(E, B, particle, 0, 10)
->>>>>>> ad1e2ca3f4610892f9b0c614c10268bcfc4dd461
 
 
 r = Drawer(particle.getTrajectory())
