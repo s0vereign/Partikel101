@@ -17,13 +17,10 @@ class Drawer:
     
      
     
-    def __init__(self,r,v):
-    
-        self.r = r;
-        self.v = v;        
+    def __init__(self):
+        pass    
         
-        
-    def Draw(self):
+    def DrawTrajectory(self, r):
         """        
         Draws the calculated trajectory
         
@@ -38,7 +35,7 @@ class Drawer:
         z = [];        
         
         
-        for i in self.r:
+        for i in r:
             
             x.append(i[0]);
             y.append(i[1]);
@@ -49,18 +46,18 @@ class Drawer:
         ax.legend();
         plt.show()
         
-        
-    def Draw_Ekin(self,ekin,t_start,t_end,dt):   
-                 
+    def DrawKineticEnergy(self,ekin,t_start,t_end,dt):   
          
-         
+             
              t =  np.arange(t_start,t_end,dt);
+             print(len(t))
+             print(len(ekin))
              plt.title('PLotting the Kinetic Energy');
              plt.plot(t,ekin);
              plt.ylabel('Kinetic Energy [eV]');
              plt.xlabel('Time');
              plt.show();
-            
+             
         
     """
     Draws the kinetic Energy 

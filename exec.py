@@ -18,15 +18,15 @@ from Particle import Particle
 from Field    import Field
 
 def E_Feld(x,y,z, t):
-    Ex = 1;
-    Ey = 0;
-    Ez = 0;
+    Ex = 1000;
+    Ey = 5000;
+    Ez = 8000;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-"""
-This function provied
-"""    
+    """
+    This function provied
+    """    
     
     Bx = 0;
     By = 0;
@@ -34,17 +34,23 @@ This function provied
     
     return [Bx, By, Bz];
 
+r0 = np.array([0,0,0])
+v0 = np.array([0,0,1000])
+m = 1
+q = 1
+
+tStart = 0
+tEnd = 10
+dt = 1e-4
+
 E = Field(E_Feld)
 B = Field(B_Feld)
-electron = Particle(np.array([0,0,0]), np.array([1,0,0]), 1, 1)
+particle = Particle(r0, v0, m, q)
 
-comput = Computer()
-comput.start(E, B, electron, 0, 30)
-particle = Particle(np.array([0,0,0]), np.array([1,0,0]), 1, 1)
-
-comput = Computer()
-comput.start(E, B, particle, 0, 10)
+comput = Computer(dt)
+comput.start(E, B, particle, tStart, tEnd)
 
 
-r = Drawer(particle.getTrajectory())
-r.Draw()
+r = Drawer()
+r.DrawTrajectory(particle.getTrajectory())
+r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
