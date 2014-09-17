@@ -38,3 +38,4 @@ class Computer:
         for t in np.arange(start, end, self.dt):
             self.step(E, B, particle, t)
     
+    

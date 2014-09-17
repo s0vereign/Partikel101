@@ -16,11 +16,11 @@ from Computer import Computer
 from Drawer   import Drawer
 from Particle import Particle
 from Field    import Field
-
+from Constants import Constants
 def E_Feld(x,y,z, t):
-    Ex = 1000;
-    Ey = 5000;
-    Ez = 8000;
+    Ex = 0;
+    Ey = 0;
+    Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
@@ -29,15 +29,16 @@ def B_Feld(x,y,z, t):
     """    
     
     Bx = 0;
-    By = 0;
+    By = 0.2;
     Bz = 0;
     
     return [Bx, By, Bz];
 
-r0 = np.array([0,0,0])
-v0 = np.array([0,0,1000])
+
 m = 1
 q = 1
+v0 = np.array([0,0,Constants.c*0.08])
+r0 = np.array([0,0,0])
 
 tStart = 0
 tEnd = 10
