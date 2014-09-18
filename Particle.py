@@ -15,24 +15,24 @@ class Particle:
     """
     def __init__(self, 
                  r0 = np.array([0,0,0]),
-                 v0 = np.array([0,0,0]),
+                 cp0 = np.array([0,0,0]),
                  m = 1,
                  q = 1):
         """Initialise all relevant properties.
         """
-        self.v0 = v0;
-        self.r0 = r0;
-        self.v = [];
-        self.r = [];
-        self.a = 0;
-        self.m = m;
-        self.q = q;
+        self.cp0 = cp0; #MeV
+        self.r0 = r0;   #in m
+        self.cp = [];   #in MeV
+        self.r = [];    #in m
+        self.a = 0;     #in m/s^2
+        self.m = m;     #in MeV/c^2
+        self.q = q;     #in elementary charges Q  = n*e
     
-    def getCurrentV(self):
+    def getCurrentcp(self):
         """Returns the current velocity of the particle (last entry of all
            tracked velocities)
         """
-        return self.v[-1::1].pop() if self.v[-1::1] else self.v0;
+        return self.cp[-1::1].pop() if self.cp[-1::1] else self.cp0;
     
     def getA(self):
         """Returns current acceleration
@@ -43,6 +43,26 @@ class Particle:
         """Returns the mass of the particle
         """
         return self.m;
+    
+
+
+    def getBeta(self,cp):
+        
+        """
+        Gets the particle impuls and returns the 
+        beta as an scalar!
+        """
+        
+        return (np.linalg.norm(cp)*(1/(Constants.c**2*self.getM())));
+
+
+    def getGamma(self,Beta):
+        """
+        gets the Beta = v/c and returns the Gamma
+        
+        """
+        
+        return 1/(np.sqrt(1-Beta**2));
         
     def getQ(self):
         """Returns the charge (in coulombs) of the particle
@@ -60,10 +80,10 @@ class Particle:
         """
         self.r.append(r);
         
-    def addV(self, v):
+    def addcp(self, cp):
         """ Updates current velocity
         """
-        self.v.append(v);
+        self.cp.append(cp);
         
     def setA(self, a):
         """Updates the particle's current acceleration
@@ -79,19 +99,16 @@ class Particle:
     def getVelocities(self):
         """Returns all available velocities
         """
-        return [np.linalg.norm(v) for v in self.v];
+        return [(np.linalg.norm(cp)*1/(Constants.c*self.getM())) for cp in self.cp];
         
     def getKineticEnergy(self, factor = 1, electronVolt = True):
-        """Returns the kinetic energy, standard: electron volts (alternative: Joule)
-           with any factor (e.g. factor = 10^6 = 1M -> Megaelectron volts/Joule)
+        """Returns the kinetic energy, standard: MeV         
         """
-
-        AbsVector = lambda vVec: np.linalg.norm(vVec);
-        EkinJoule = lambda v: (1 / np.sqrt(1 - AbsVector(v)**2 / Constants.c**2) - 1) * self.m * Constants.c**2;
-
-        if electronVolt:
-
-            return [ EkinJoule(v) / Constants.e / factor for v in self.v] # Ekin in eV
-        else:
-            return [EkinJoule(v) / factor for v in self.v] # Ekin in Joule
-            
+        
+        return [((self.getGamma((self.getBeta(cp)))-1)*self.getM()*Constants.c**2) for cp in self.cp]; 
+        
+        
+        
+        
+        
+        

@@ -18,20 +18,21 @@ class Computer:
         F = particle.getQ() * (
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
-                        particle.getCurrentV(),
+                        particle.getCurrentcp()*(1/(Constants.c*particle.getM())),
                         B.calcField( particle.getCurrentPos(), t)
                     )
             );
-        gamma = 1 / np.sqrt(1 - particle.getCurrentV()**2 / Constants.c**2)
+        gamma = particle.getGamma(particle.getBeta(particle.getCurrentcp()));
         a = F / (particle.getM() * gamma);
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
-        r = particle.getCurrentPos() + particle.getCurrentV() * self.dt + 1.0/2 * particle.getA() * self.dt**2
-        v = particle.getCurrentV() + 1 / 2.0 * ( particle.getA() + a ) * self.dt
+        r = particle.getCurrentPos() + (particle.getCurrentcp()*1/(Constants.c*particle.getM())) * self.dt + 1.0/2 * particle.getA() * self.dt**2
+        cp = particle.getCurrentcp() + 1 / 2.0 * ( particle.getA() + a ) * self.dt
         
         particle.addPos(r);
-        particle.addV(v);
+        particle.addcp(cp);
         particle.setA(a);
+        
        
         
     def start(self, E, B, particle, start, end):

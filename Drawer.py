@@ -54,6 +54,7 @@ class Drawer:
              plt.ylabel('Kinetic Energy [eV]');
              plt.xlabel('Time');
              plt.show();
+             print(ekin);
              
         
     """
