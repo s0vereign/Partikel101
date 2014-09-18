@@ -56,6 +56,7 @@ comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
+print(particle.getKineticEnergy());
 #r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
 
 

@@ -53,7 +53,7 @@ class Particle:
         beta as an scalar!
         """
         
-        return (np.sqrt(1-(self.getM()**2/(cp)**2+self.getM()**2)));
+        return (np.sqrt(1-(self.getM()**2/(np.linalg.norm(cp))**2+self.getM()**2)));
 
 
     def getGamma(self,Beta):
