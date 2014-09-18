@@ -42,7 +42,7 @@ m = Constants.mp
 q = Constants.e
 cp0 = np.array([np.sqrt(20e6**2 - m**2),0,0])
 tStart = 0
-tEnd = 20
+tEnd = 50
 dt = 1e-3
 
 E = Field(E_Feld)

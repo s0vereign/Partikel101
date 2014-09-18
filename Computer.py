@@ -40,7 +40,8 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-      
+        r = particle.getBeta(particle.getCurrentcp())*particle.getGamma(particle.getBeta(particle.getCurrentcp()))*particle.getM()/(Constants.c*0.2)
+        print(r)        
         for i in range(start, end):
             for t in np.arange(i, i+1, self.dt):
                 self.step(E, B, particle, t)
