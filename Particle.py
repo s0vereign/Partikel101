@@ -20,10 +20,8 @@ class Particle:
                  q = 1):
         """Initialise all relevant properties.
         """
-        self.cp0 = cp0; #MeV
-        self.r0 = r0;   #in m
-        self.cp = [];   #in MeV
-        self.r = [];    #in m
+        self.cp = [cp0];   #in MeV
+        self.r = [r0];    #in m
         self.a = 0;     #in m/s^2
         self.m = m;     #in MeV/c^2
         self.q = q;     #in elementary charges Q  = n*e
@@ -32,7 +30,7 @@ class Particle:
         """Returns the current velocity of the particle (last entry of all
            tracked velocities)
         """
-        return self.cp[-1::1].pop() if self.cp[-1::1] else self.cp0;
+        return self.cp[-1::1].pop();
     
     def getA(self):
         """Returns current acceleration
@@ -73,7 +71,7 @@ class Particle:
     def getCurrentPos(self):
         """Returns current position (last entry of trajectory-list)
         """
-        return self.r[-1::1].pop() if self.r[-1::1] else self.r0
+        return self.r[-1::1].pop()
     
     def addPos(self, r):
         """ Adds a position to the list of positions (= the trajectory).
