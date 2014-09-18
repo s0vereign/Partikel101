@@ -44,6 +44,7 @@ class Drawer:
         #ax = fig.gca(projection='3d');
         ax.plot(x,y,z,label = 'Tajectory');
         ax.legend();
+        
         plt.show()
 
 

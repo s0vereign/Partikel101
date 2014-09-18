@@ -25,7 +25,7 @@ class Computer:
             );
             
             
-        a = F / (particle.getM() * gamma) * Constants.c**2;
+        a = F / (particle.getM() * gamma);
         """        
         e_cp = particle.getCurrentcp()/np.linalg.norm(particle.getCurrentcp());
         a_p  = np.dot(a,e_cp)*e_cp;
