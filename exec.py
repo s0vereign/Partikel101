@@ -42,7 +42,7 @@ m = Constants.mp
 q = Constants.e
 cp0 = np.array([np.sqrt(20e6**2 - m**2),0,0])
 tStart = 0
-tEnd = 80
+tEnd = 100
 dt = 1e-3
 
 E = Field(E_Feld)
@@ -51,14 +51,6 @@ particle = Particle(r0, cp0, m, q)
 comput = Computer(dt)
 comput.start(E, B, particle, tStart, tEnd)
 
-
 r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
-
-#print(particle.getKineticEnergy());
-#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
-#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
-
-
-
-#r.DrawKineticEnergy(particle.getVelocities(), tStart, tEnd, dt)
+r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)

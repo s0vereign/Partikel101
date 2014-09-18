@@ -92,14 +92,9 @@ class Particle:
     def getTrajectory(self):
         """Returns the list of positions (= the trajectory)
         """
-
         return self.r;
         
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: MeV         
         """
-
         return [np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2) - self.getM() for cp in self.cp];
-        
-
-

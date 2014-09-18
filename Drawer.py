@@ -52,7 +52,7 @@ class Drawer:
 
     def DrawKineticEnergy(self,ekin,t_start,t_end,dt):   
              
-             t =  np.arange(t_start,t_end,dt);
+             t =  np.arange(t_start,t_end + dt,dt);
              plt.title('Plotting the Kinetic Energy');
              plt.plot(t,ekin);
              plt.ylabel('Kinetic Energy [eV]');
