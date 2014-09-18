@@ -19,28 +19,19 @@ class Computer:
         F = particle.getQ() * (
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
-                        particle.getCurrentcp()*Constants.c / (gamma * particle.getM()),
+                        particle.getCurrentcp() / (gamma * particle.getM()),
                         B.calcField( particle.getCurrentPos(), t)
                     )
             );
             
             
         a = F / (particle.getM() * gamma);
-        """        
-        e_cp = particle.getCurrentcp()/np.linalg.norm(particle.getCurrentcp());
-        a_p  = np.dot(a,e_cp)*e_cp;
-        a_s  = a-a_p;
-        """
+        
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
-        r = particle.getCurrentPos() + (particle.getCurrentcp()*Constants.c)/(gamma*particle.getM()) * self.dt + \
+        r = particle.getCurrentPos() + (particle.getCurrentcp())/(gamma*particle.getM()) * self.dt + \
             1.0/2 * particle.getA() * self.dt**2 
-        cp = particle.getCurrentcp() + particle.getA()*self.dt*particle.getM()/Constants.c;
-        """        
-        cp_1 = particle.getCurrentcp() + a_p*self.dt*gamma*particle.getM()/Constants.c;
-        cp_2 = cp_1 + a_s*self.dt*(gamma*particle.getM())/Constants.c;        
-        cp = cp_2/np.linalg.norm(cp_2)*np.linalg.norm(cp_1)        
-        """
+        cp = particle.getCurrentcp() + particle.getA()*self.dt*Constants.c**2*particle.getM();
         
         particle.addPos(r);
         particle.addcp(cp);
