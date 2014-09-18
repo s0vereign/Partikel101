@@ -96,16 +96,11 @@ class Particle:
 
         return self.r;
         
-    def getVelocities(self):
-        """Returns all available velocities
-        """
-        return [(np.linalg.norm(cp)*1/(Constants.c*self.getM())) for cp in self.cp];
-        
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: MeV         
         """
         
-        return [((self.getGamma((self.getBeta(cp)))-1)*self.getM()*Constants.c**2) for cp in self.cp]; 
+        return [np.sqrt(cp**2 + self.getM()**2) - self.getM() for cp in self.cp];
         
         
         

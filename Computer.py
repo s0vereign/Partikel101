@@ -15,18 +15,18 @@ class Computer:
         self.dt = dt;
     
     def step(self, E, B, particle, t):
+        gamma = particle.getGamma(particle.getBeta(particle.getCurrentcp()));
         F = particle.getQ() * (
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
-                        particle.getCurrentcp()*(1/(Constants.c*particle.getM())),
+                        particle.getCurrentcp()*Constants.c / (gamma * particle.getM()),
                         B.calcField( particle.getCurrentPos(), t)
                     )
             );
-        gamma = particle.getGamma(particle.getBeta(particle.getCurrentcp()));
-        a = F / (particle.getM() * gamma);
+        a = F / (particle.getM() * gamma) * Constants.c**2;
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
-        r = particle.getCurrentPos() + (particle.getCurrentcp()*1/(Constants.c*particle.getM())) * self.dt + 1.0/2 * particle.getA() * self.dt**2
+        r = particle.getCurrentPos() + (particle.getCurrentcp()*Constants.c)/(gamma*particle.getM()) * self.dt + 1.0/2 * particle.getA() * self.dt**2
         cp = particle.getCurrentcp() + 1 / 2.0 * ( particle.getA() + a ) * self.dt
         
         particle.addPos(r);
