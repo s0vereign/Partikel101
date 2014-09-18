@@ -45,7 +45,7 @@ class Drawer:
         ax.plot(x,y,z,label = 'Tajectory');
         ax.legend();
         plt.show()
-        
+        """
     def DrawKineticEnergy(self,ekin,t_start,t_end,dt):   
              
              t =  np.arange(t_start,t_end,dt);
@@ -56,7 +56,7 @@ class Drawer:
              plt.show();
              print(ekin);
              
-        
+        """
     """
     Draws the kinetic Energy 
     """

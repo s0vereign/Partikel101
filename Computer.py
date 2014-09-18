@@ -27,7 +27,7 @@ class Computer:
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + (particle.getCurrentcp()*1/(Constants.c*particle.getM())) * self.dt + 1.0/2 * particle.getA() * self.dt**2
-        cp = particle.getCurrentcp() + 1 / 2.0 * ( particle.getA() + a ) * self.dt
+        cp = particle.getCurrentcp() + 1 / 2.0 * ( particle.getA() + a ) *(gamma*Particle.getM())*1/Constants.c)* self.dt
         
         particle.addPos(r);
         particle.addcp(cp);
