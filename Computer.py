@@ -4,7 +4,7 @@ Created on Mon Sep 15 16:29:43 2014
 
 @author: max
 """
-
+from __future__ import division
 import numpy as np
 
 from Constants import Constants

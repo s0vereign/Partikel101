@@ -20,7 +20,7 @@ from Constants import Constants
 
 def E_Feld(x,y,z, t):
 
-    Ex = 0;
+    Ex = 2;
     Ey = 0;
     Ez = 0;
     return [Ex, Ey, Ez];
@@ -31,7 +31,7 @@ def B_Feld(x,y,z, t):
     """    
     
     Bx = 0;
-    By = 0.2;
+    By = 0.1;
     Bz = 0;
     
     return [Bx, By, Bz];
@@ -42,7 +42,7 @@ m = Constants.me
 q = Constants.e
 cp0 = np.array([np.sqrt(20e6**2 - m**2),0,0])
 tStart = 0
-tEnd = 200
+tEnd = 100
 dt = 1e-3
 
 E = Field(E_Feld)
@@ -57,7 +57,7 @@ r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
 print(particle.getTrajectory()[0])
 #print(particle.getKineticEnergy());
-#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
+r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
 #r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
 
 
