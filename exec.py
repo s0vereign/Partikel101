@@ -38,13 +38,12 @@ def B_Feld(x,y,z, t):
 
 
 r0 = np.array([0,0,0])
-
-cp0 = np.array([100,0,0])
 m = Constants.me
 q = Constants.e
+cp0 = np.array([np.sqrt(20e6**2 - m**2),0,0])
 tStart = 0
-tEnd = 50
-dt = 1e-2
+tEnd = 200
+dt = 1e-3
 
 E = Field(E_Feld)
 B = Field(B_Feld)
@@ -56,7 +55,9 @@ comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
-print(particle.getKineticEnergy());
+print(particle.getTrajectory()[0])
+#print(particle.getKineticEnergy());
+#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
 #r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
 
 

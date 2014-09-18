@@ -53,8 +53,9 @@ class Particle:
         beta as an scalar!
         """
         
-        return (np.sqrt(1-(self.getM()**2/(np.linalg.norm(cp))**2+self.getM()**2)));
 
+        b = np.sqrt(1-(self.getM()**2/(np.linalg.norm(cp)**2+self.getM()**2)));
+        return b
 
     def getGamma(self,Beta):
         """
@@ -100,9 +101,7 @@ class Particle:
         """Returns the kinetic energy, standard: MeV         
         """
 
-        return [np.sqrt(cp**2 + self.getM()**2) - self.getM() for cp in self.cp];
-                
+        return [np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2) - self.getM() for cp in self.cp];
         
-        
-        
-        
+
+
