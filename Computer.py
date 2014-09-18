@@ -30,13 +30,17 @@ class Computer:
         a_s  = a-a_p;
         
         
-        #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf cp = particle.getCurrentcp() + 1 / 2.0 * ( particle.getA() + a ) *(gamma*Particle.getM())*1/Constants.c)* self.dt
-
-        r = particle.getCurrentPos() + (particle.getCurrentcp()*Constants.c)/(gamma*particle.getM()) * self.dt + 1.0/2 * particle.getA() * self.dt**2
-        
-        cp_1 = particle.getCurrentcp() + a_p*self.dt*(gamma*particle.getM())/Constants.c;
+        #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
+        r = particle.getCurrentPos() + (particle.getCurrentcp()*Constants.c)/(gamma*particle.getM()) * self.dt + \
+            1.0/2 * particle.getA() * self.dt**2 *gamma*particle.getM()/Constants.c
+        cp_1 = particle.getCurrentcp() + a_p*self.dt*gamma*particle.getM()/Constants.c;
         cp_2 = cp_1 + a_s*self.dt*(gamma*particle.getM())/Constants.c;        
         cp = cp_2/np.linalg.norm(cp_2)*np.linalg.norm(cp_1)        
+        print(gamma)
+        print(F)
+        print(a)
+        print(r)
+        print(cp)
         
         particle.addPos(r);
         particle.addcp(cp);

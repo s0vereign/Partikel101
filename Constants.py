@@ -9,6 +9,6 @@ class Constants:
     c = 299792458 # m/s
     e = 1 # coulombs
     
-    me = 0.510      
+    me = 0.510e6
     mp = 938.27     
     mn = 939.565    
