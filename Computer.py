@@ -35,12 +35,6 @@ class Computer:
         print("v:", particle.getCurrentcp())
         print("a:", a)
         
-        cp_1 = particle.getCurrentcp() + a_p * self.dt * Constants.c**2 * particle.getM()
-        cp_2 = cp_1 + a_s * self.dt * Constants.c**2 * particle.getM()
-        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
-        particle.addcp(cp);
-                
-        
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + (Constants.c * particle.getCurrentcp())/(gamma*particle.getM()) * self.dt + \
             1.0/2 * a * self.dt**2 
@@ -57,9 +51,7 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-        for i in range(start, end):
-            for t in np.arange(i, i+1, self.dt):
-                self.step(E, B, particle, t)
-            print("{:5.1f} %".format((i+1)/end*100))
+        for t in np.arange(start, end, self.dt):
+            self.step(E, B, particle, t)
 
     
