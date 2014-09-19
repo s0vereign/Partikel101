@@ -30,7 +30,7 @@ class Particle:
         """Returns the current velocity of the particle (last entry of all
            tracked velocities)
         """
-        return self.cp[-1::1].pop();
+        return self.cp[-1];
     
     def getA(self):
         """Returns current acceleration
@@ -73,7 +73,7 @@ class Particle:
     def getCurrentPos(self):
         """Returns current position (last entry of trajectory-list)
         """
-        return self.r[-1::1].pop()
+        return self.r[-1]
     
     def addPos(self, r):
         """ Adds a position to the list of positions (= the trajectory).

@@ -45,8 +45,8 @@ print("cp0:",cp0)
 print("Gamma1:", 20/m+1)
 print("Gamma2:", np.sqrt(np.linalg.norm(cp0)**2 / m**2 + 1))
 tStart = 0
-tEnd = 10
-dt = 1e-3
+tEnd = 1e-11
+dt = 1e-13
 
 E = Field(E_Feld)
 B = Field(B_Feld)
@@ -56,4 +56,4 @@ comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
-r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
+#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
