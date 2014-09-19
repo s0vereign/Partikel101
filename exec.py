@@ -21,14 +21,13 @@ from Constants import Constants
 def E_Feld(x,y,z, t):
 
     Ex = 0;
-    Ey = 0;
+    Ey = 0.0;
     Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-    """
-    This function provied
-    """    
+    
+    
     
     Bx = 0;
     By = 0.2;
@@ -37,21 +36,24 @@ def B_Feld(x,y,z, t):
     return [Bx, By, Bz];
 
 
-r0 = np.array([1,0,0])
+
+r0 = np.array([0,0,0])
 m = Constants.me
 q = Constants.e
-cp0 = np.array([np.sqrt(20-m**2),0,0])
+cp0 = np.sqrt(20**2 - m**2) * np.array([1,0,0])
+print("cp0:",cp0)
+print("Gamma1:", 20/m+1)
+print("Gamma2:", np.sqrt(np.linalg.norm(cp0)**2 / m**2 + 1))
 tStart = 0
-tEnd = 20
-dt = 1e-2
+tEnd = 2
+dt = 1e-3
 
 E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
-particle.getBeta(cp0)
-#comput = Computer(dt)
-#comput.start(E, B, particle, tStart, tEnd)
+comput = Computer(dt)
+comput.start(E, B, particle, tStart, tEnd)
 
-#r = Drawer()
-#r.DrawTrajectory(particle.getTrajectory())
+r = Drawer()
+r.DrawTrajectory(np.multiply(particle.getTrajectory(),1))
 #r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)

@@ -42,7 +42,7 @@ class Drawer:
             z.append(i[2]);
                       
         #ax = fig.gca(projection='3d');
-        ax.plot(x,y,z,label = 'Tajectory');
+        ax.plot(x,y,z,label = 'Trajectory');
         ax.legend();
         
         plt.show()

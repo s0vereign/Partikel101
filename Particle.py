@@ -45,27 +45,25 @@ class Particle:
     
 
 
-    def getBeta(self,cp):
+    def getBeta(self):
         
         """
         Gets the particle impuls and returns the 
         beta as an scalar!
         """
-        cpb = np.linalg.norm(cp);
-
-        b = np.sqrt(1/((self.getM()/cpb)**2 + 1));
+        
+        #b = np.sqrt(1-(self.getM()**2/(np.linalg.norm(cp)**2+self.getM()**2)));
+        #b= np.sqrt(1 / ( (self.getM() / np.linalg.norm(self.getCurrentcp()))**2 + 1))
+        b = np.sqrt(1 - 1 / self.getGamma()**2)
         return b
 
-    def getGamma(self,Beta):
+    def getGamma(self):
         """
         gets the Beta = v/c and returns the Gamma
         
         """
         
-        g = 1/(np.sqrt(1.-Beta**2));
-        
-        return g;        
-        
+        return np.sqrt(np.linalg.norm(self.getCurrentcp())**2 / self.getM()**2 + 1);        
     def getQ(self):
         """Returns the charge (in coulombs) of the particle
         """
@@ -95,8 +93,12 @@ class Particle:
     def getTrajectory(self):
         """Returns the list of positions (= the trajectory)
         """
+        
         return self.r;
         
+        
+        
+    
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: MeV         
         """
