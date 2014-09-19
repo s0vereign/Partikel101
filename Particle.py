@@ -21,10 +21,10 @@ class Particle:
         """Initialise all relevant properties.
         """
         self.cp = [cp0];   #in MeV
-        self.r = [r0];    #in m
-        self.a = 0;     #in m/s^2
-        self.m = m;     #in MeV/c^2
-        self.q = q;     #in elementary charges Q  = n*e
+        self.r = [r0];     #in m
+        self.a = 0;        #in m/s^2
+        self.m = m;        #in MeV/c^2
+        self.q = q;        #in elementary charges Q  = n*e
     
     def getCurrentcp(self):
         """Returns the current velocity of the particle (last entry of all
@@ -51,7 +51,6 @@ class Particle:
         beta as an scalar!
         """
         
-
         #b = np.sqrt(1-(self.getM()**2/(np.linalg.norm(cp)**2+self.getM()**2)));
         #b= np.sqrt(1 / ( (self.getM() / np.linalg.norm(self.getCurrentcp()))**2 + 1))
         b = np.sqrt(1 - 1 / self.getGamma()**2)
@@ -63,8 +62,7 @@ class Particle:
         
         """
         
-        return np.sqrt(np.linalg.norm(self.getCurrentcp())**2 / self.getM()**2 + 1);
-        
+        return np.sqrt(np.linalg.norm(self.getCurrentcp())**2 / self.getM()**2 + 1);        
     def getQ(self):
         """Returns the charge (in coulombs) of the particle
         """
@@ -94,8 +92,12 @@ class Particle:
     def getTrajectory(self):
         """Returns the list of positions (= the trajectory)
         """
+        
         return self.r;
         
+        
+        
+    
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """Returns the kinetic energy, standard: MeV         
         """

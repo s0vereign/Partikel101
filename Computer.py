@@ -13,6 +13,7 @@ class Computer:
     
     def __init__(self, dt = 1e-3):
         self.dt = dt;
+
     
     def step(self, E, B, particle, t):
         gamma = particle.getGamma();
@@ -22,7 +23,7 @@ class Computer:
 #        print("CP:", particle.getCurrentcp())
 #        print("Beta:", particle.getBeta())
 #        print("v:", np.linalg.norm(particle.getCurrentcp() * Constants.c / (gamma * particle.getM())))
-        F = particle.getQ() * (
+        F =(    particle.getQ()*
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
                         particle.getCurrentcp() * Constants.c / ( gamma * particle.getM()),
@@ -33,6 +34,12 @@ class Computer:
         a = F / (particle.getM() * 1e6) * Constants.c**2 * 1e10
         print("v:", particle.getCurrentcp())
         print("a:", a)
+        
+        cp_1 = particle.getCurrentcp() + a_p * self.dt * Constants.c**2 * particle.getM()
+        cp_2 = cp_1 + a_s * self.dt * Constants.c**2 * particle.getM()
+        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
+        particle.addcp(cp);
+                
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + (Constants.c * particle.getCurrentcp())/(gamma*particle.getM()) * self.dt + \
@@ -50,11 +57,9 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-        r = particle.getBeta()*particle.getGamma()*particle.getM()/(Constants.c*0.2)*1e6
-        print(r)
-        #for i in range(start, end):
-        for t in np.arange(start, end, self.dt):
-            self.step(E, B, particle, t)
-        #print("{:5.1f} %".format((i+1)/end*100))
+        for i in range(start, end):
+            for t in np.arange(i, i+1, self.dt):
+                self.step(E, B, particle, t)
+            print("{:5.1f} %".format((i+1)/end*100))
 
     

@@ -21,20 +21,20 @@ from Constants import Constants
 def E_Feld(x,y,z, t):
 
     Ex = 0;
-    Ey = 0;
+    Ey = 0.0;
     Ez = 0;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-    """
-    This function provied
-    """    
+    
+    
     
     Bx = 0;
     By = 0.2;
     Bz = 0;
     
     return [Bx, By, Bz];
+
 
 
 r0 = np.array([0,0,0])
