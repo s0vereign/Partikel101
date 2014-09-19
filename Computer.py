@@ -13,20 +13,27 @@ class Computer:
     
     def __init__(self, dt = 1e-3):
         self.dt = dt;
-        self.init_cp = 0;
     
     def step(self, E, B, particle, t):
-        gamma = particle.getGamma(particle.getBeta(particle.getCurrentcp()));
+        gamma = particle.getGamma();
+#        print("------------------------------")
+#        print("T:", t)
+#        print("Gamma:", gamma)
+#        print("CP:", particle.getCurrentcp())
+#        print("Beta:", particle.getBeta())
+#        print("v:", np.linalg.norm(particle.getCurrentcp() * Constants.c / (gamma * particle.getM())))
         F = particle.getQ() * (
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
-                        particle.getCurrentcp() / (gamma * particle.getM()),
+                        particle.getCurrentcp() * Constants.c / (gamma * particle.getM()),
                         B.calcField( particle.getCurrentPos(), t)
                     )
             );
-            
-            
-        a = F / (particle.getM() * gamma);
+        #a = F / (particle.getM() * gamma);
+        e__ = 1.60217657e-19
+        a = F * Constants.c**2 / particle.getM() * e__**2
+#        print("F:", F)
+#        print("a:", a)
 
         ev = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp())
         a_p = np.dot(particle.getA(), ev) * ev
@@ -42,9 +49,10 @@ class Computer:
         cp_1 = particle.getCurrentcp() + a_p * self.dt * Constants.c**2 * particle.getM()
         cp_2 = cp_1 + a_s * self.dt * Constants.c**2 * particle.getM()
         cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
-        #~ print(np.linalg.norm(self.init_cp) - np.linalg.norm(cp))
-        #~ print(np.linalg.norm(a - a_s))
         
+#        print("a_p", np.linalg.norm(a_p))
+#        print("|cp_1|", np.linalg.norm(cp_1))
+#        print("|cp|", np.linalg.norm(cp))
         
         particle.addPos(r);
         particle.addcp(cp);
@@ -53,9 +61,8 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-        r = particle.getBeta(particle.getCurrentcp())*particle.getGamma(particle.getBeta(particle.getCurrentcp()))*particle.getM()/(Constants.c*0.2)
-        print(r)git s
-        self.init_cp = particle.getCurrentcp()
+        r = particle.getBeta()*particle.getGamma()*particle.getM()/(Constants.c*0.2)
+        print(r)
         for i in range(start, end):
             for t in np.arange(i, i+1, self.dt):
                 self.step(E, B, particle, t)

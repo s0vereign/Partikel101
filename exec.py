@@ -38,11 +38,14 @@ def B_Feld(x,y,z, t):
 
 
 r0 = np.array([0,0,0])
-m = Constants.mp
+m = Constants.me
 q = Constants.e
-cp0 = np.array([np.sqrt(20e6**2 - m**2),0,0])
+cp0 = np.sqrt(20**2 - m**2) * np.array([1,0,0])
+print("cp0:",cp0)
+print("Gamma1:", 20/m+1)
+print("Gamma2:", np.sqrt(np.linalg.norm(cp0)**2 / m**2 + 1))
 tStart = 0
-tEnd = 100
+tEnd = 10
 dt = 1e-3
 
 E = Field(E_Feld)
