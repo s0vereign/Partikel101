@@ -54,7 +54,7 @@ class Computer:
         
     def start(self, E, B, particle, start, end):
         r = particle.getBeta(particle.getCurrentcp())*particle.getGamma(particle.getBeta(particle.getCurrentcp()))*particle.getM()/(Constants.c*0.2)
-        print(r)git s
+        print(r)
         self.init_cp = particle.getCurrentcp()
         for i in range(start, end):
             for t in np.arange(i, i+1, self.dt):
