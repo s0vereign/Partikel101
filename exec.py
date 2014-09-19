@@ -22,7 +22,7 @@ def E_Feld(x,y,z, t):
 
     Ex = 0;
     Ey = 0;
-    Ez = 0;
+    Ez = 8000;
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
@@ -31,7 +31,7 @@ def B_Feld(x,y,z, t):
     
     Bx = 0;
     By = 0;
-    Bz = 1;
+    Bz = 0;
     
     return [Bx, By, Bz];
 
@@ -45,8 +45,8 @@ print("cp0:",cp0)
 print("Gamma1:", 20/m+1)
 print("Gamma2:", np.sqrt(np.linalg.norm(cp0)**2 / m**2 + 1))
 tStart = 0
-tEnd = 1e-11
-dt = 1e-13
+tEnd = 1e-9
+dt = 1e-10
 
 E = Field(E_Feld)
 B = Field(B_Feld)
@@ -56,4 +56,4 @@ comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.DrawTrajectory(particle.getTrajectory())
-r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
+#r.DrawKineticEnergy(particle.getKineticEnergy(), tStart, tEnd, dt)
