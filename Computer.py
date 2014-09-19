@@ -31,7 +31,7 @@ class Computer:
                     )
             );
         #a = F / (particle.getM() * gamma);
-        a = F / (particle.getM() * 1e6) * Constants.c**2
+        a = F / (particle.getM() * 1e6) * Constants.c**2 / 3
 #        print("v:", particle.getCurrentcp())
 #        print("a:", a)
         
