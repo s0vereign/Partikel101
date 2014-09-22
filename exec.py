@@ -23,10 +23,10 @@ def E_Feld(x,y,z, t):
     Ex = 0;
     Ey = 0;
     
-    Ez = math.sin(Constants.w*t)+math.cos(Constants.w/Constants.c*z);
+    Ez = 20*math.sin(Constants.w*t)+math.cos(Constants.w/Constants.c*z);
     if(Ez < 0):
         Ez = Ez*-1
-    return [Ex, Ey, Ez];
+    return [Ez, Ey, Ex];
 
 def B_Feld(x,y,z, t):
     Bx = 0;
@@ -41,9 +41,9 @@ def B_Feld(x,y,z, t):
 r0 = np.array([0,0,0])
 m = Constants.me
 q = Constants.e
-cp0 = np.sqrt((20 + m)**2 - m**2) * np.array([0,0,1])
+cp0 = np.sqrt((20 + m)**2 - m**2) * np.array([1,0,0])
 tStart = 0
-tEnd = 1e-9
+tEnd = 1e-8
 dt = 1e-11
 
 E = Field(E_Feld)
