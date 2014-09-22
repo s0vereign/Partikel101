@@ -17,12 +17,6 @@ class Computer:
     
     def step(self, E, B, particle, t):
         gamma = particle.getGamma();
-#        print("------------------------------")
-#        print("T:", t)
-#        print("Gamma:", gamma)
-#        print("CP:", particle.getCurrentcp())
-#        print("Beta:", particle.getBeta())
-#        print("v:", np.linalg.norm(particle.getCurrentcp() * Constants.c / (gamma * particle.getM())))
         F =(    particle.getQ()*
                 E.calcField( particle.getCurrentPos(), t ) + 
                     np.cross(
@@ -31,7 +25,7 @@ class Computer:
                     )
             );
         #a = F / (particle.getM() * gamma);
-        a = F / (particle.getM() * 1e6) * Constants.c**2 / 38
+        a = F / (particle.getM() * 1e6 * particle.getGamma()) * Constants.c**2
 #        print("v:", particle.getCurrentcp())
 #        print("a:", a)
         
@@ -42,7 +36,7 @@ class Computer:
 #        print("a:", a)
         cp = particle.getCurrentcp() + a * self.dt * particle.getM() * gamma / Constants.c
 #        print("v_neu", cp* np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp))
-        #cp = cp* np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp)
+        cp = cp * np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp)
         
         particle.addPos(r);
         particle.addcp(cp);
