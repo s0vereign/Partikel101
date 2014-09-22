@@ -22,8 +22,13 @@ class Computer:
                         B.calcField( particle.getCurrentPos(), t)
                     )
             );
-        gamma = 1 / np.sqrt(1 - particle.getCurrentV()**2 / Constants.c**2)
+        gamma = 1 / np.sqrt(1 - np.linalg.norm(particle.getCurrentV())**2 / Constants.c**2)
         a = F / (particle.getM() * gamma);
+        
+        print("v:", particle.getCurrentV())
+        print("a:", a)
+        print("F:", F)
+        print("Gamma:", gamma)
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + particle.getCurrentV() * self.dt + 1.0/2 * particle.getA() * self.dt**2
@@ -35,9 +40,6 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
-      
-        for i in range(start, end):
-            for t in np.arange(i, i+1, self.dt):
-                self.step(E, B, particle, t)
-            print("{:5.1f} %".format((i+1)/end*100))
+      for t in np.arange(start, end, self.dt):
+          self.step(E, B, particle, t)
 
