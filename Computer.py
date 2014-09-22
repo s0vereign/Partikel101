@@ -31,7 +31,7 @@ class Computer:
                     )
             );
         #a = F / (particle.getM() * gamma);
-        a = F / (particle.getM() * 1e6) * Constants.c**2 / 3
+        a = F / (particle.getM() * 1e6) * Constants.c**2 / 38
 #        print("v:", particle.getCurrentcp())
 #        print("a:", a)
         
@@ -51,6 +51,9 @@ class Computer:
        
         
     def start(self, E, B, particle, start, end):
+        r = particle.getBeta()*particle.getGamma()*particle.getM()*1e6/(Constants.c*0.2)
+        print(r)
+
         for t in np.arange(start, end, self.dt):
             self.step(E, B, particle, t)
 
