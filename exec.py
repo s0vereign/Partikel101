@@ -19,20 +19,16 @@ from Field    import Field
 from Constants import Constants
 
 def E_Feld(x,y,z, t):
-
     Ex = 0;
     Ey = 0;
-    Ez = 8000;
+    Ez = 20;
+    
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
-    
-    
-    
     Bx = 0;
-    By = 0;
-    Bz = 0;
-    
+    By = 0.2;
+    Bz = 0;    
     return [Bx, By, Bz];
 
 
@@ -44,13 +40,15 @@ cp0 = np.sqrt(20**2 - m**2) * np.array([1,0,0])
 print("cp0:",cp0)
 print("Gamma1:", 20/m+1)
 print("Gamma2:", np.sqrt(np.linalg.norm(cp0)**2 / m**2 + 1))
+
 tStart = 0
 tEnd = 1e-9
-dt = 1e-10
+dt = 1e-11
 
 E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
+print("Radius:", particle.getBeta()*particle.getGamma()*m*1e6*1/(0.2*Constants.c));
 comput = Computer(dt)
 comput.start(E, B, particle, tStart, tEnd)
 

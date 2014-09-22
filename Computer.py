@@ -31,17 +31,17 @@ class Computer:
                     )
             );
         #a = F / (particle.getM() * gamma);
-        a = F / (particle.getM() * 1e6) * Constants.c**2 * 1e10
-        print("v:", particle.getCurrentcp())
-        print("a:", a)
+        a = F / (particle.getM() * 1e6) * Constants.c**2 / 3
+#        print("v:", particle.getCurrentcp())
+#        print("a:", a)
         
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + (Constants.c * particle.getCurrentcp())/(gamma*particle.getM()) * self.dt + \
             1.0/2 * a * self.dt**2 
             
-        print("a:", a)
-        cp = particle.getCurrentcp() + a * self.dt / Constants.c**2 * particle.getM() * gamma
-        print("v_neu", cp* np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp))
+#        print("a:", a)
+        cp = particle.getCurrentcp() + a * self.dt * particle.getM() * gamma / Constants.c
+#        print("v_neu", cp* np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp))
         #cp = cp* np.linalg.norm(particle.getCurrentcp()) / np.linalg.norm(cp)
         
         particle.addPos(r);
