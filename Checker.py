@@ -2,6 +2,8 @@
 """
 Created on Wed Sep 17 13:35:36 2014
 
+Ignore this Class!
+
 @author: max
 """
 

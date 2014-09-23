@@ -21,7 +21,7 @@ class Drawer:
         Draws the calculated trajectory
         """
         r = particle.getTrajectory();
-        ekin = particle.getKineticEnergy();
+        ekin = particle.getKineticEnergy2();
         x,y,z = [], [], []
         for i in r:
             x.append(i[0]);
@@ -31,7 +31,7 @@ class Drawer:
         t =  np.arange(t_start,t_end + dt,dt);
         
         fig = plt.figure(figsize=(8,6));
-        gs = gridspec.GridSpec(2, 1, height_ratios=[4, 1])
+        gs = gridspec.GridSpec(2, 1, height_ratios=[4, 2])
         
         ax = fig.add_subplot(gs[0], projection='3d')
         ax.plot(x,y,z,label = 'Trajectory');

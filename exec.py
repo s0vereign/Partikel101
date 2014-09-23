@@ -23,7 +23,7 @@ from Constants import Constants
 def E_Feld(x,y,z, t):
     Ex = 0;
     Ey = 0;
-    Ez = 20*(math.sin(Constants.w*t)+sin((0.5*Constants.w/Constants.c)*z));
+    Ez = 20*(math.sin(Constants.w*t)+sin((Constants.w/Constants.c)*z));
     
     if(Ez < 0):
         
@@ -45,10 +45,11 @@ def B_Feld(x,y,z, t):
 r0 = np.array([0,0,0])
 m = Constants.me
 q = Constants.e
-cp0 = np.sqrt((20 + m)**2 - m**2) * np.array([0,0,1])
+#whats's the idea in calculating cp0 this way??!?!?!?
+cp0 = np.sqrt((20+m)**2 - m**2) * np.array([0,0,1]) 
 tStart = 0
-tEnd = 4*1e-9
-dt = 1e-10
+tEnd = 3.2*1e-9
+dt = 1e-12
 
 E = Field(E_Feld)
 B = Field(B_Feld)

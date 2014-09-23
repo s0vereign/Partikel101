@@ -108,8 +108,9 @@ class Particle:
     def getZeroes(self,n):
                 
         """
-        Helping method to indicate the location of the Cavities
-        
+        Helping method to indicate the location between the Cavities
+        Idea: According to the models of cavity resonators, the Field
+        is zero when the particle is between two resonators!
         """
         
         
@@ -131,7 +132,7 @@ class Particle:
         g = []
         for i in range(len(self.cp)):
             
-            g.append(np.sqrt(np.linalg.norm(self.cp[i])/ self.getM()**2 + 1));
+            g.append(np.sqrt(np.linalg.norm(self.cp[i])**2/ self.getM()**2 + 1));
             
         for j in range(len(self.cp)):
             
