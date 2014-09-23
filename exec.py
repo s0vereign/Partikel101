@@ -22,10 +22,12 @@ from Constants import Constants
 def E_Feld(x,y,z, t):
     Ex = 0;
     Ey = 0;
+    Ez = 20*(math.sin(Constants.w*t)+sin((0.5*Constants.w/Constants.c)*z));
     
-    Ez = 20*(math.sin(Constants.w*t)+sin((Constants.w/Constants.c)*z));
     if(Ez < 0):
+        
         Ez = Ez*-1
+    
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
