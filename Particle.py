@@ -5,6 +5,7 @@ Created on Mon Sep 15 16:26:04 2014
 @author: max
 """
 
+from __future__  import division
 import numpy as np
 
 from Constants import Constants
@@ -26,7 +27,7 @@ class Particle:
         self.a = 0;        #in m/s^2
         self.m = m;        #in MeV/c^2
         self.q = q;        #in elementary charges Q  = n*e
-    
+        self.z = []; 
     def getCurrentcp(self):
         """
         Returns the current velocity of the particle (last entry of all
@@ -96,8 +97,47 @@ class Particle:
         """
         return self.r;
         
+        
+        
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """
         Returns the kinetic energy, standard: MeV         
         """
         return [np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2) for cp in self.cp];
+    
+    def getZeroes(self,n):
+                
+        """
+        Helping method to indicate the location of the Cavities
+        
+        """
+        
+        
+        self.z.append(n);
+        
+        
+    def getKineticEnergy2(self):            
+        
+        """
+        Alternativ way to calc the kinetic Energy
+        Returns the kinetic Energy of the whole run
+        as an array!
+        
+
+        """                
+        
+        
+        E_temp = []        
+        g = []
+        for i in range(len(self.cp)):
+            
+            g.append(np.sqrt(np.linalg.norm(self.cp[i])/ self.getM()**2 + 1));
+            
+        for j in range(len(self.cp)):
+            
+            cp1 = (g[j]-1)*self.getM();
+            
+            E_temp.append(cp1);
+        
+        return E_temp;
+                    

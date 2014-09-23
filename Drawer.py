@@ -16,10 +16,12 @@ class Drawer:
     def __init__(self):
         pass    
         
-    def Draw(self, r, ekin, t_start, t_end, dt):
+    def Draw(self, particle, t_start, t_end, dt):
         """        
         Draws the calculated trajectory
         """
+        r = particle.getTrajectory();
+        ekin = particle.getKineticEnergy();
         x,y,z = [], [], []
         for i in r:
             x.append(i[0]);
@@ -42,6 +44,7 @@ class Drawer:
         #ax.title('Plotting the Kinetic Energy');
         ax.plot(t,ekin);
         ax.set_ylabel('Kinetic Energy [MeV]');
+        
         ax.set_xlabel('Time [s]');
         
         plt.show()

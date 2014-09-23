@@ -8,7 +8,7 @@ Description: returnfield returns a magnetic or elecrical field
 vector. calcfield calculates the field
 
 """
-
+from __future__  import division
 import numpy as np
 
 class Field:
