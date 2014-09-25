@@ -22,10 +22,12 @@ class Drawer:
         """
         r = particle.getTrajectory();
         ekin = particle.getKineticEnergy();
-        x,y,z = [], [], []
+        
         trigs = particle.getTriggers();
         E = particle.getField();
         z1 = particle.getZ();
+        
+        x,y,z = [], [], []
         for i in r:
             x.append(i[0]);
             y.append(i[1]);
@@ -47,7 +49,6 @@ class Drawer:
         #ax.title('Plotting the Kinetic Energy');
         ax.plot(t,ekin);
         ax.set_ylabel('Kinetic Energy [MeV]');
-        
         ax.set_xlabel('Time [s]');
         
         for i in range(len(trigs)):
@@ -59,6 +60,5 @@ class Drawer:
         ax.plot(z1,E);     
         ax.set_xlabel('$z$');
         ax.set_ylabel('$MeV/m$');
-        
         
         plt.show()

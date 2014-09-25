@@ -68,14 +68,12 @@ class Particle:
         Returns the charge (in coulombs) of the particle
         """
         return self.q;
-    def getPos(self,i):
         
+    def getPos(self,i):
         """
         returns the r of a certain index in the
         position field
-        
         """
-        
         return self.r[i];        
         
     def getCurrentPos(self):
@@ -109,8 +107,6 @@ class Particle:
         """
         return self.r;
         
-        
-        
     def getKineticEnergy(self, factor = 1, electronVolt = True):
         """
         Returns the kinetic energy, standard: MeV         
@@ -120,40 +116,32 @@ class Particle:
     def calcKineticEnergy(self,cp):
         """
         Takes cp as argument and the returns the kinetic Energy for this CP
-        """        
-        
-        
+        """
         return np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2)
+        
     def saveField(self,E):
         """
         Saves the Field it's in!
-        
         """
         self.E.append(E);
         
     def saveZ(self,z):
-        
         self.z1.append(z);
         
     def getZ(self):
-        
         return self.z1;
         
     def getField(self):
-        
         return self.E;
         
     def Trigger(self,t,cp):
         """
         Computer 'Triggers' if end of Cavity is reached
         and saves it with this method into the cavity 
-        """        
-        
-        
+        """
         self.z.append([t,self.calcKineticEnergy(cp)]);
     
     def getTriggers(self):
-        
         """
         returns all the saved triggerevents from above
         """
