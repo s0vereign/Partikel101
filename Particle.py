@@ -67,6 +67,15 @@ class Particle:
         Returns the charge (in coulombs) of the particle
         """
         return self.q;
+    def getPos(self,i):
+        
+        """
+        returns the r of a certain index in the
+        position field
+        
+        """
+        
+        return self.r[i];        
         
     def getCurrentPos(self):
         """
@@ -107,44 +116,32 @@ class Particle:
         """
         return [np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2) for cp in self.cp];
     
-    def getZeroes(self,n):
-                
+    def calcKineticEnergy(self,cp):
         """
-        Helping method to indicate the location between the Cavities
-        Idea: According to the models of cavity resonators, the Field
-        is zero when the particle is between two resonators!
-        """
+        Takes cp as argument and the returns the kinetic Energy for this CP
+        """        
         
         
-        self.z.append(n);
-    def saveField(E):
+        return np.sqrt(np.linalg.norm(cp)**2 + self.getM()**2)
+    def saveField(self,E):
         """
         Saves the Field it's in!
         
         """
+        self.E.append(E);
         
-    def getKineticEnergy2(self):            
+    def Trigger(self,t,cp):
+        """
+        Computer 'Triggers' if end of Cavity is reached
+        and saves it with this method into the cavity 
+        """        
+        
+        
+        self.z.append([t,self.calcKineticEnergy(cp)]);
+    
+    def getTriggers(self):
         
         """
-        Alternativ way to calc the kinetic Energy
-        Returns the kinetic Energy of the whole run
-        as an array!
-        
-
-        """                
-        
-        
-        E_temp = []        
-        g = []
-        for i in range(len(self.cp)):
-            
-            g.append(np.sqrt(np.linalg.norm(self.cp[i])**2/ self.getM()**2 + 1));
-            
-        for j in range(len(self.cp)):
-            
-            cp1 = (g[j]-1)*self.getM();
-            
-            E_temp.append(cp1);
-        
-        return E_temp;
-                    
+        returns all the saved triggerevents from above
+        """
+        return self.z ;

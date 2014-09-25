@@ -15,7 +15,7 @@ class Computer:
         self.dt = dt;
         
     
-    def step(self, E, B, particle, t):
+    def step(self, E, B, particle, t,n):
         
         """
         
@@ -25,13 +25,13 @@ class Computer:
         
         
         """
-        B1 = E.calcField( particle.getCurrentPos(), t)
-        
+        B1 = B.calcField( particle.getCurrentPos(), t);
+        E1 = E.calcField(particle.getCurrentPos(),t);
         gamma = particle.getGamma();
         
         
         F =(    particle.getQ()*
-                E.calcField( particle.getCurrentPos(), t ) + 
+                E1 + 
                     np.cross(
                         particle.getCurrentcp() * Constants.c / ( gamma * particle.getM()),
                           B1  
@@ -58,16 +58,24 @@ class Computer:
         particle.addPos(r);
         particle.addcp(cp);
         particle.setA(a);
-#        if( np.linalg.norm(B1) == 0):
-#            
-#            particle.getZeroes(t);
-#        
+        particle.saveField(E1[2])
+        
+        rval = np.linalg.norm(r-particle.getPos(0)); #|r-r0|
+        
+        if(rval >= n*Constants.lamb*0.5):#if n*lambda/2 reached?
+            
+            particle.Trigger(t,particle.calcKineticEnergy(cp));#if so trigger 
+            n +=1                                              
+            
+        return n
+        
        
         
     def start(self, E, B, particle, start, end,n = 0):
        
         for t in np.arange(start, end, self.dt):
            
-            self.step(E, B, particle, t)
+           n1 =  self.step(E, B, particle, t,n)
+           n  = n1;
 
     

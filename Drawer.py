@@ -23,6 +23,7 @@ class Drawer:
         r = particle.getTrajectory();
         ekin = particle.getKineticEnergy();
         x,y,z = [], [], []
+        trigs = particle.getTriggers();        
         for i in r:
             x.append(i[0]);
             y.append(i[1]);
@@ -47,4 +48,8 @@ class Drawer:
         
         ax.set_xlabel('Time [s]');
         
+        for i in range(len(trigs)):
+            xy1 = trigs[i]
+            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]-3), arrowprops=dict(facecolor='black', shrink=0.05))
+        ax.set_ylim(0,50);
         plt.show()
