@@ -72,11 +72,13 @@ class Computer:
         
        
         
-    def start(self, E, B, particle, start, end,n = 1):
+    def start(self, E, B, particle, start, end,n = 0):
        
         for t in np.arange(start, end, self.dt):
            
            n1 =  self.step(E, B, particle, t,n)
            n  = n1;
+           if(n >= 9):
+               n = 100000.
 
     
