@@ -31,6 +31,12 @@ def E_Feld(x,y,z, t):
         
         Ez = Ez*-1
         
+    rb = np.sqrt((x**2)+(y**2)+(z**2))
+
+    if(rb > 9*Constants.lamb*0.5):
+
+        Ez = 0;
+        
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
@@ -48,7 +54,7 @@ q = Constants.e
 #whats's the idea in calculating cp0 this way??!?!?!?
 cp0 = np.sqrt((20+m)**2 - m**2) * np.array([0,0,1]) 
 tStart = 0
-tEnd = 3.2*1e-9
+tEnd = 3.3*1e-9
 dt = 1e-11
 
 E = Field(E_Feld)

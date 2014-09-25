@@ -17,3 +17,4 @@ class Constants:
     mn = 939.565    
     rf = 1.3e9
     w  = 2*math.pi*rf
+    lamb = c/rf
