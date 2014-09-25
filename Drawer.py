@@ -50,6 +50,6 @@ class Drawer:
         
         for i in range(len(trigs)):
             xy1 = trigs[i]
-            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]-3), arrowprops=dict(facecolor='black', shrink=0.05))
+            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]-15), arrowprops=dict(facecolor='black', shrink=0.05))
         ax.set_ylim(0,50);
         plt.show()
