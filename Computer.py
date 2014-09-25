@@ -44,7 +44,7 @@ class Computer:
             1.0/2 * a * self.dt**2 
        
                
-        cp = particle.getCurrentcp()+a*self.dt;
+        cp = particle.getCurrentcp()+F*self.dt*Constants.c;
 #        aGes = a
 #        eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
 #        aP = np.dot(aGes, eCp) * eCp
