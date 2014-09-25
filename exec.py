@@ -23,7 +23,7 @@ from Constants import Constants
 def E_Feld(x,y,z, t):
     Ex = 0;
     Ey = 0;
-    Ez = 20*(math.sin(Constants.w*t)+sin((Constants.w/Constants.c)*z));
+    Ez = 20*(math.sin(Constants.w*t)*sin((Constants.w/Constants.c)*z));
     
     if(Ez < 0):
         
@@ -33,7 +33,7 @@ def E_Feld(x,y,z, t):
         
     rb = np.sqrt((x**2)+(y**2)+(z**2))
 
-    if(rb > 8*Constants.lamb*0.5):
+    if(rb >= 9*Constants.lamb*0.5):
 
         Ez = 0;
         
