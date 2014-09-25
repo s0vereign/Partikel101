@@ -49,7 +49,7 @@ q = Constants.e
 cp0 = np.sqrt((20+m)**2 - m**2) * np.array([0,0,1]) 
 tStart = 0
 tEnd = 3.2*1e-9
-dt = 1e-12
+dt = 1e-11
 
 E = Field(E_Feld)
 B = Field(B_Feld)
