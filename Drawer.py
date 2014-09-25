@@ -21,7 +21,7 @@ class Drawer:
         Draws the calculated trajectory
         """
         r = particle.getTrajectory();
-        ekin = particle.getKineticEnergy2();
+        ekin = particle.getKineticEnergy();
         x,y,z = [], [], []
         for i in r:
             x.append(i[0]);

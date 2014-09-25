@@ -28,6 +28,8 @@ class Particle:
         self.m = m;        #in MeV/c^2
         self.q = q;        #in elementary charges Q  = n*e
         self.z = []; 
+        self.E = []        
+        
     def getCurrentcp(self):
         """
         Returns the current velocity of the particle (last entry of all
@@ -115,7 +117,11 @@ class Particle:
         
         
         self.z.append(n);
+    def saveField(E):
+        """
+        Saves the Field it's in!
         
+        """
         
     def getKineticEnergy2(self):            
         

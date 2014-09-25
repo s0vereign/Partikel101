@@ -25,7 +25,7 @@ class Computer:
         
         
         """
-        B1 = B.calcField( particle.getCurrentPos(), t)
+        B1 = E.calcField( particle.getCurrentPos(), t)
         
         gamma = particle.getGamma();
         
@@ -44,23 +44,24 @@ class Computer:
             1.0/2 * a * self.dt**2 
        
                
-        
-        aGes = a
-        eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
-        aP = np.dot(aGes, eCp) * eCp
-        aV = aGes - aP
-                
-        cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
-        cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
-        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
+        cp = particle.getCurrentcp()+a*self.dt;
+#        aGes = a
+#        eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
+#        aP = np.dot(aGes, eCp) * eCp
+#        aV = aGes - aP
+#                
+#        cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
+#        cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
+#        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
+#       
         
         particle.addPos(r);
         particle.addcp(cp);
-        #particle.setA(a);
-        if( np.linalg.norm(B1) == 0):
-            
-            particle.getZeroes(t);
-        
+        particle.setA(a);
+#        if( np.linalg.norm(B1) == 0):
+#            
+#            particle.getZeroes(t);
+#        
        
         
     def start(self, E, B, particle, start, end,n = 0):
