@@ -36,7 +36,7 @@ class Drawer:
         t =  np.arange(t_start,t_end + dt,dt);
         
         fig = plt.figure(figsize=(8,6));
-        gs = gridspec.GridSpec(3, 1, height_ratios=[4, 2, 2])
+        gs = gridspec.GridSpec(3, 1, height_ratios=[4, 2, 1])
         
         ax = fig.add_subplot(gs[0], projection='3d')
         ax.plot(x,y,z,label = 'Trajectory');
@@ -54,7 +54,7 @@ class Drawer:
         for i in range(len(trigs)):
             xy1 = trigs[i]
             ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]+10), arrowprops=dict(facecolor='black', shrink=0.05))
-        ax.set_ylim(0,60);
+        ax.set_ylim(0,50);
         
         ax = fig.add_subplot(gs[2])
         ax.plot(z1,E);     
