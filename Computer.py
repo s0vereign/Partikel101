@@ -55,12 +55,12 @@ class Computer:
 #        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
 #       
         
+        particle.saveField([particle.getCurrentPos()[2],E1[2]]);
         particle.addPos(r);
         particle.addcp(cp);
         particle.setA(a);
-        particle.saveField(E1[2])
-        
         rval = np.linalg.norm(r-particle.getPos(0)); #|r-r0|
+        
         
         if(rval >= n*Constants.lamb*0.5):#if n*lambda/2 reached?
             
@@ -71,7 +71,7 @@ class Computer:
         
        
         
-    def start(self, E, B, particle, start, end,n = 0):
+    def start(self, E, B, particle, start, end,n = 1):
        
         for t in np.arange(start, end, self.dt):
            

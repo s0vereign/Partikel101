@@ -23,7 +23,9 @@ class Drawer:
         r = particle.getTrajectory();
         ekin = particle.getKineticEnergy();
         x,y,z = [], [], []
-        trigs = particle.getTriggers();        
+        trigs = particle.getTriggers();
+        E = particle.getField();
+                
         for i in r:
             x.append(i[0]);
             y.append(i[1]);
@@ -32,7 +34,7 @@ class Drawer:
         t =  np.arange(t_start,t_end + dt,dt);
         
         fig = plt.figure(figsize=(8,6));
-        gs = gridspec.GridSpec(2, 1, height_ratios=[4, 2])
+        gs = gridspec.GridSpec(3, 1, height_ratios=[4, 2, 2])
         
         ax = fig.add_subplot(gs[0], projection='3d')
         ax.plot(x,y,z,label = 'Trajectory');
@@ -50,6 +52,13 @@ class Drawer:
         
         for i in range(len(trigs)):
             xy1 = trigs[i]
-            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]-15), arrowprops=dict(facecolor='black', shrink=0.05))
-        ax.set_ylim(0,50);
+            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]+10), arrowprops=dict(facecolor='black', shrink=0.05))
+        ax.set_ylim(0,60);
+        
+        ax = fig.add_subplot(gs[2])
+        ax.plot(E[0],E[1]);
+        ax.set_xlabel('$z$');
+        ax.set_ylabel('$MeV/m$') 
+        
+        
         plt.show()
