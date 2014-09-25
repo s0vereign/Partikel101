@@ -56,7 +56,10 @@ class Drawer:
         ax.set_ylim(0,60);
         
         ax = fig.add_subplot(gs[2])
-        ax.plot(E[0],E[1]);
+        for i in range(len(E)):
+            E1 = E[i][1];
+            z  = E[i][0];
+        ax.plot(z,E1)     
         ax.set_xlabel('$z$');
         ax.set_ylabel('$MeV/m$') 
         
