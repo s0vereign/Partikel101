@@ -28,7 +28,8 @@ class Particle:
         self.m = m;        #in MeV/c^2
         self.q = q;        #in elementary charges Q  = n*e
         self.z = []; 
-        self.E = []        
+        self.E = [];
+        self.z1 = [];        
         
     def getCurrentcp(self):
         """
@@ -129,6 +130,18 @@ class Particle:
         
         """
         self.E.append(E);
+        
+    def saveZ(self,z):
+        
+        self.z1.append(z);
+        
+    def getZ(self):
+        
+        return self.z1;
+        
+    def getField(self):
+        
+        return self.E;
         
     def Trigger(self,t,cp):
         """

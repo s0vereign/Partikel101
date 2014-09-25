@@ -55,7 +55,8 @@ class Computer:
 #        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
 #       
         
-        particle.saveField([particle.getCurrentPos()[2],E1[2]]);
+        particle.saveField(E1[2]);
+        particle.saveZ(r[2]);
         particle.addPos(r);
         particle.addcp(cp);
         particle.setA(a);

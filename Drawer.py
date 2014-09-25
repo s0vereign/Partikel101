@@ -25,7 +25,7 @@ class Drawer:
         x,y,z = [], [], []
         trigs = particle.getTriggers();
         E = particle.getField();
-                
+        z1 = particle.getZ();
         for i in r:
             x.append(i[0]);
             y.append(i[1]);
@@ -56,12 +56,9 @@ class Drawer:
         ax.set_ylim(0,60);
         
         ax = fig.add_subplot(gs[2])
-        for i in range(len(E)):
-            E1 = E[i][1];
-            z  = E[i][0];
-        ax.plot(z,E1)     
+        ax.plot(z1,E);     
         ax.set_xlabel('$z$');
-        ax.set_ylabel('$MeV/m$') 
+        ax.set_ylabel('$MeV/m$');
         
         
         plt.show()
