@@ -25,17 +25,11 @@ def E_Feld(x,y,z, t):
     Ey = 0;
     Ez = 20*(math.sin(Constants.w*t)+sin((Constants.w/Constants.c)*z));
     
-    if(Ez < 0):
-        
-        
-        
-        Ez = Ez*-1
+    #~ if(Ez < 0):
+        #~ Ez = Ez*-1
         
     rb = np.sqrt((x**2)+(y**2)+(z**2))
-
-    if(rb > 8*Constants.lamb*0.5):
-
-        Ez = 0;
+    if(rb > 8*Constants.lamb*0.5):Ez = 0;
         
     return [Ex, Ey, Ez];
 
@@ -69,4 +63,3 @@ comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.Draw(particle, tStart, tEnd, dt)
-print(particle.getKineticEnergy()[-1]);
