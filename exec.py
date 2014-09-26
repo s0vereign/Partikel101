@@ -25,13 +25,14 @@ r0 = np.array([0,0,0])
 m = cons.me
 q = cons.e
 #whats's the idea in calculating cp0 this way??!?!?!?
-cp0 = np.sqrt((20+m)**2 - m**2) * np.array([1,0,0]) 
+cp0 = np.sqrt(0.3) * np.array([1,0,0]) 
 tStart = 0
 tEnd = 1e-8
 dt = 1e-10
 
 def E_Feld(x,y,z, t):
-    
+    d1 = cons.d1
+    d2 = cons.d2
     r = np.array([x,y,z]);
     rbetr = np.linalg.norm(r);
     s1 = 1/(rbetr+0.5*cons.d1b)**2-1/(rbetr-0.5*cons.d1b)**2
@@ -41,8 +42,8 @@ def E_Feld(x,y,z, t):
     # so much for the norm of the field now let's get to the 
     # direction
     
-    er1 = r + 0.5*cons.d1/(np.linalg.norm(r+0.5*cons.d1))+ r-0.5*d1/np.linalg.norm(r-0.5*d1)
-    er2 = r + 0.5*cons.d2/np.linalg.norm(r+0.5*consd1) + r - 0.5*d2/np.linalg.norm(r-0.5*d2)
+    er1 = r + 0.5*d1/(np.linalg.norm(r+0.5*cons.d1))+ r-0.5*d1/np.linalg.norm(r-0.5*d1)
+    er2 = r + 0.5*cons.d2/np.linalg.norm(r+0.5*cons.d1) + r - 0.5*d2/np.linalg.norm(r-0.5*d2)
     er = er1 + er2;
     #calculated the direction of the field
     

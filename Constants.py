@@ -17,9 +17,10 @@ class Constants:
     mp = 938.27;     
     mn = 939.565;    
     rf = 1.3e9;
-    w  = 2*math.pi*rf;
+    w  = 2*math.pi*rf;  
     lamb = c/rf;
     U = 20.; #V/m
+    e0 = 8.854e-12 #C/(VM)
     
     """
     Definition of the quadrupol field!
