@@ -44,16 +44,16 @@ class Computer:
             1.0/2 * a * self.dt**2 
        
                
-        cp = particle.getCurrentcp()+F*self.dt*Constants.c;
-#        aGes = a
-#        eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
-#        aP = np.dot(aGes, eCp) * eCp
-#        aV = aGes - aP
-#                
-#        cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
-#        cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
-#        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
-#       
+        #cp = particle.getCurrentcp()+F*self.dt*Constants.c;
+        aGes = a
+        eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
+        aP = np.dot(aGes, eCp) * eCp
+        aV = aGes - aP
+                
+        cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
+        cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
+        cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
+       
         
         particle.saveField(E1[2]);
         particle.saveZ(r[2]);

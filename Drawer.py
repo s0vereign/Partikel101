@@ -50,11 +50,11 @@ class Drawer:
         
         ax.set_xlabel('Time [s]');
         
-        for i in range(len(trigs)):
-            xy1 = trigs[i]
-            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]+10), arrowprops=dict(facecolor='black', shrink=0.05))
-        ax.set_ylim(0,60);
-        
+#        for i in range(len(trigs)):
+#            xy1 = trigs[i]
+#            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]+10), arrowprops=dict(facecolor='black', shrink=0.05))
+#        ax.set_ylim(0,60);
+#        
         ax = fig.add_subplot(gs[2])
         ax.plot(z1,E);     
         ax.set_xlabel('$z$');
