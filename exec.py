@@ -21,27 +21,26 @@ from Constants import Constants as cons
 
 from IPython.display import display_latex
 
-U0 = 1e4#V
+#U0 = 10e3#V
 z0 = 11.18e-3#m
 roh0 = 13e-3#m
 B0 = 5.9#T
 d = np.sqrt(1/2 * (z0**2 + roh0**2 / 2))
+n = 1.0 / 6
 
 r0 = np.array([0.0,0.0,0.0])
 m = 52019.47214708469#MeV
 q = 6
-cp0 = np.sqrt((0.0002 + m)**2 - m**2) * np.array([1,0,1])
+
+cp0 = np.sqrt((0.0002 + m)**2 - m**2) * np.array([1,0,0])
 tStart = 0
 tEnd = 1e-6
 dt = 1e-10
 
 def E_Feld(x,y,z, t):
-    roh = np.sqrt(x**2 + y**2)
-    #E = - U0 / (2 * d**2) * (2 * z - roh)
+    Ex = U0 / (2 * d**2) * x
+    Ey = U0 / (2 * d**2) * y
     Ez = - U0 / d**2 * z
-    Eroh = U0 / (2 * d**2) *  roh
-    Ex = Eroh * np.cos(np.arctan2(y,x))
-    Ey = Eroh * np.sin(np.arctan2(y,x))
     
     return [Ex, Ey, Ez];
     #return [0,0,Ez]
@@ -59,6 +58,10 @@ B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
 
 omega_c = q / m * cons.c**2 * B0 * 1e-6
+
+U0 = (n * omega_c * d)**2 * m *1e6 / (q * cons.c**2)
+print(U0)
+
 omega_z = np.sqrt(q * cons.c**2 * U0/(m * d**2*1e6))
 print(r"$\omega_c$ = {:5.2e}".format(omega_c))
 print(r"$\omega_z$ = {:5.2e}".format(omega_z))
