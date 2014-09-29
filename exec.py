@@ -25,36 +25,24 @@ roh0 = 13e-3#m
 B0 = 5.9#T
 d = np.sqrt(1/2 * (z0**2 + roh0**2 / 2))
 
-r0 = np.array([1.0,1.0,1.0])
+r0 = np.array([0.0,0.0,0.0])
 m = 52019.47214708469#MeV
 q = 6
-cp0 = np.sqrt((0.28204529073527773 + m**2)**2 - m**2) * np.array([1,0,0])
+cp0 = np.sqrt((0.2 + m)**2 - m**2) * np.array([1,0,1])
 tStart = 0
-tEnd = 1e-7
-dt = 1e-11
+tEnd = 1e-6
+dt = 1e-10
 
 def E_Feld(x,y,z, t):
-    
-    try:
-        roh = np.sqrt(x**2 + y**2)
-        #E = - U0 / (2 * d**2) * (2 * z - roh)
-        Ez = U0 / d**2 * z**2
-        Eroh = U0 / (2 * d**2) *  roh
-        Ex = Eroh * (np.cos(np.arctan2(y,x)))
-        Ey = Eroh * (np.sin(np.arctan2(y,x)))
-        
-        assert isinstance(x, np.float64)
-        assert isinstance(y, np.float64)
-        assert isinstance(Eroh, np.float64)
-        assert isinstance(roh, np.float64)
-    except BaseException, e:
-        print(e)
-        print(type(x),x)
-        print(type(y),y)
-        print(type(Eroh), Eroh)
-        print(type(roh), roh)
+    roh = np.sqrt(x**2 + y**2)
+    #E = - U0 / (2 * d**2) * (2 * z - roh)
+    Ez = - U0 / d**2 * z
+    Eroh = U0 / (2 * d**2) *  roh
+    Ex = Eroh * np.cos(np.arctan2(y,x))
+    Ey = Eroh * np.sin(np.arctan2(y,x))
     
     return [Ex, Ey, Ez];
+    return [0,0,Ez]
 
 def B_Feld(x,y,z, t):
     Bx = 0;
@@ -62,15 +50,14 @@ def B_Feld(x,y,z, t):
     Bz = B0;
     
     return [Bx, By, Bz];
-
-
+    #return [0,0,0]
 
 E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
 
 #print("Radius [m]:", particle.getBeta()*particle.getGamma()*particle.getM()*1e6/(cons.c*np.linalg.norm(B.calcField(r0,0))))
-
+print(particle.getBeta())
 
 comput = Computer(dt)
 comput.start(E, B, particle, tStart, tEnd)

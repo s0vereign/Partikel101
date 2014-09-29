@@ -23,11 +23,11 @@ class Computer:
         E1 = E.calcField(particle.getCurrentPos(),t);
         gamma = particle.getGamma();
         
-        F =(    particle.getQ()*
+        F = particle.getQ() * (
                 E1 + 
                     np.cross(
                         particle.getCurrentcp() * Constants.c / ( gamma * particle.getM()),
-                          B1  
+                          B1
                     )
             );
         a = F / (particle.getM() * 1e6 * particle.getGamma()) * Constants.c**2
