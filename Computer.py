@@ -53,7 +53,7 @@ class Computer:
         cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
         cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
         cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
-       
+#       
         
         particle.saveField(E1[2]);
         particle.saveZ(r[2]);

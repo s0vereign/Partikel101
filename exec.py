@@ -25,18 +25,23 @@ r0 = np.array([0,0,0])
 m = cons.me
 q = cons.e
 #whats's the idea in calculating cp0 this way??!?!?!?
-cp0 = np.sqrt(0.3) * np.array([1,0,0]) 
+cp0 = 0.8 * np.array([1,0,0]) 
 tStart = 0
-tEnd = 1e-8
-dt = 1e-10
+tEnd = 1e-9
+dt = 1e-11
 
 def E_Feld(x,y,z, t):
     d1 = cons.d1
     d2 = cons.d2
+    d1b = cons.d1b
+    d2b = cons.d2b
+    
+    
     r = np.array([x,y,z]);
     rbetr = np.linalg.norm(r);
-    s1 = 1/(rbetr+0.5*cons.d1b)**2-1/(rbetr-0.5*cons.d1b)**2
-    s2 = 1/(rbetr+0.5*cons.d2b)**2-1/(rbetr-0.5*cons.d2b)**2
+    s1 = 1/(rbetr+0.5*d1b)**2-1/(rbetr-0.5*d1b)**2#Calculate the 
+    s2 = 1/(rbetr+0.5*d2b)**2-1/(rbetr-0.5*d2b)**2#reziproke terms
+    
     sg = s1+s2                  #Calculating the reziproke terms
     Eges = q**2/(4*math.pi*cons.e0)*sg
     # so much for the norm of the field now let's get to the 
@@ -54,7 +59,7 @@ def E_Feld(x,y,z, t):
 def B_Feld(x,y,z, t):
     Bx = 0;
     By = 0;
-    Bz = 0.2;
+    Bz = 0.02;
     
     return [Bx, By, Bz];
 
@@ -64,7 +69,7 @@ E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
 
-#print("Radius [m]:", particle.getBeta()*particle.getGamma()*particle.getM()*1e6/(Constants.c*np.linalg.norm(B.calcField(r0,0))))
+print("Radius [m]:", particle.getBeta()*particle.getGamma()*particle.getM()*1e6/(cons.c*np.linalg.norm(B.calcField(r0,0))))
 
 
 comput = Computer(dt)
