@@ -27,8 +27,8 @@ q = cons.e
 #whats's the idea in calculating cp0 this way??!?!?!?
 cp0 = np.sqrt(0.3) * np.array([1,0,0]) 
 tStart = 0
-tEnd = 1e-8
-dt = 1e-10
+tEnd = 9*1e-9
+dt = 1e-11
 
 def E_Feld(x,y,z, t):
     d1 = cons.d1

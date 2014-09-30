@@ -29,10 +29,10 @@ class Constants:
     
     """
     
-    rq1 = np.array([0,0,0]);
-    rq2 = np.array([0,0,0]);
-    rq3 = np.array([0,0,0]);
-    rq4 = np.array([0,0,0]);
+    rq1 = np.array([0,1,0]);
+    rq2 = np.array([0,0,1]);
+    rq3 = np.array([0,-1,0]);
+    rq4 = np.array([0,0,-1]);
     d1  = rq1 - rq2;
     d2  = rq3 - rq4;
     d1b = np.linalg.norm(d1);
