@@ -46,8 +46,7 @@ class Drawer:
         ax = fig.add_subplot(gs[1])
         #ax.title('Plotting the Kinetic Energy');
         ax.plot(t,ekin);
-        ax.set_ylabel('Kinetic Energy [MeV]');
-        
+        ax.set_ylabel('Kinetic Energy [MeV]');        
         ax.set_xlabel('Time [s]');
         
 #        for i in range(len(trigs)):
