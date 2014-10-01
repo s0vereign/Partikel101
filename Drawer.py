@@ -30,8 +30,8 @@ class Drawer:
             x.append(i[0]);
             y.append(i[1]);
             z.append(i[2]);
-            
-        t =  np.arange(t_start,t_end + dt,dt);
+        
+        t = np.linspace(t_start, t_end, len(ekin))
         
         fig = plt.figure(figsize=(8,6));
         gs = gridspec.GridSpec(3, 1, height_ratios=[4, 2, 2])
