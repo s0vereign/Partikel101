@@ -4,7 +4,7 @@ Created on Tue Sep 16 11:02:26 2014
 
 @author: max
 
- This is the executing script for 
+ This is the executing script for
  Project Particle 101
 
 
@@ -12,68 +12,75 @@ Created on Tue Sep 16 11:02:26 2014
 
 from __future__  import division
 import numpy as np
-import math
 from Computer import Computer
 from Drawer   import Drawer
 from Particle import Particle
 from Field    import Field
 from Constants import Constants as cons
 
-from IPython.display import display_latex
+roh0 = 8e-3#m
+z0 = roh0 / np.sqrt(2)#m
+d = np.sqrt(1.0/2 * (z0**2 + roh0**2 / 2))
+#d = 10e-3#m
 
-#U0 = 10e3#V
-z0 = 11.18e-3#m
-roh0 = 13e-3#m
-B0 = 5.9#T
-d = np.sqrt(1/2 * (z0**2 + roh0**2 / 2))
-n = 1.0 / 6
+m = cons.mp#MeV
+q = 1
 
-r0 = np.array([0.0,0.0,0.0])
-m = 52019.47214708469#MeV
-q = 6
+r = roh0 * 2 / 3.0#m
 
-cp0 = np.sqrt((0.0002 + m)**2 - m**2) * np.array([1,0,0])
+n1 = 1.0 / 200
+n2 = 1.0 / 3
+
+r0 = np.array([1.0,1.0,1.0])
+
+omega_plus = 1e6
+
+omega_c = omega_plus * (1 + 1.0 / n1)
+omega_minus = n1 * omega_plus
+omega_z = n2 * omega_plus
+
+B0 = omega_c * m / (q * cons.c**2)
+U0 = (omega_plus / n2)**2 * m / (q * cons.c**2) * d**2
+
+cp0 = m*np.sqrt( 1.0 / (1 - omega_plus**2 * r**2 / cons.c**2) - 1) * np.array([1,0,0]) # m * sqrt(gamma**2 - 1) * e_cp0
+
+print("\omega_c = {:5.2e}".format(omega_c))
+print("\omega_+ = {:5.2e}".format(omega_plus))
+print("\omega_- = {:5.2e}".format(omega_minus))
+print("\omega_z = {:5.2e}".format(omega_z))
+
+#~ print(r"\frac{\omega_+}{\omega_-} = {:5.2e}".format(omega_plus / omega_minus))
+#~ print(r"\frac{\omega_+}{\omega_z} = {:5.2e}".format(omega_plus / omega_z))
+
+print("U = {:5.2e}".format(U0))
+print("B = {:5.2e}".format(B0))
+
 tStart = 0
-tEnd = 1e-6
-dt = 1e-10
+tEnd = 1e-7
+dt = 1e-11
 
 def E_Feld(x,y,z, t):
     Ex = U0 / (2 * d**2) * x
     Ey = U0 / (2 * d**2) * y
     Ez = - U0 / d**2 * z
-    
-    return [Ex, Ey, Ez];
+
     #return [0,0,Ez]
+    return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):
     Bx = 0;
     By = 0;
     Bz = B0;
-    
-    return [Bx, By, Bz];
+
     #return [0,0,0]
+    return [Bx, By, Bz];
 
 E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
-
-omega_c = q / m * cons.c**2 * B0 * 1e-6
-
-U0 = (n * omega_c * d)**2 * m *1e6 / (q * cons.c**2)
-print(U0)
-
-omega_z = np.sqrt(q * cons.c**2 * U0/(m * d**2*1e6))
-print(r"$\omega_c$ = {:5.2e}".format(omega_c))
-print(r"$\omega_z$ = {:5.2e}".format(omega_z))
-print(r"$\omega_+$ = {:5.2e}".format(omega_c/2 + np.sqrt(omega_c**2 / 4 - omega_z**2 / 2)))
-print(r"$\omega_-$ = {:5.2e}".format(omega_c/2 - np.sqrt(omega_c**2 / 4 - omega_z**2 / 2)))
-
-#print("Radius [m]:", particle.getBeta()*particle.getGamma()*particle.getM()*1e6/(cons.c*np.linalg.norm(B.calcField(r0,0))))
-#print(particle.getBeta())
 
 comput = Computer(dt)
 comput.start(E, B, particle, tStart, tEnd)
 
 r = Drawer()
 r.Draw(particle, tStart, tEnd, dt)
-#print(particle.getKineticEnergy()[-1]);
