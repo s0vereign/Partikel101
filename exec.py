@@ -23,40 +23,73 @@ z0 = roh0 / np.sqrt(2)#m
 d = np.sqrt(1.0/2 * (z0**2 + roh0**2 / 2))
 #d = 10e-3#m
 
-m = cons.mp#MeV
-q = 1
+m = 52e3#MeV
+q = 6
 
 r = roh0 * 2 / 3.0#m
 
-n1 = 1.0 / 200
-n2 = 1.0 / 3
+n1 = 20 # = omega_plus / omega_minus
+n2 = 2 # = omega_plus / omega_z
 
 r0 = np.array([1.0,1.0,1.0])
 
-omega_plus = 1e6
+omega_plus = 1e7
 
-omega_c = omega_plus * (1 + 1.0 / n1)
-omega_minus = n1 * omega_plus
-omega_z = n2 * omega_plus
+omega_minus = omega_plus / n1
+omega_z = omega_plus / n2
+omega_c = np.sqrt( omega_plus**2 + omega_minus**2 + omega_z**2)
 
-B0 = omega_c * m / (q * cons.c**2)
-U0 = (omega_plus / n2)**2 * m / (q * cons.c**2) * d**2
+B0 = omega_c * m * 1e6 / (q * cons.c**2)
+U0 = omega_z**2 * d**2 * m * 1e6 / (q * cons.c**2)
 
-cp0 = m*np.sqrt( 1.0 / (1 - omega_plus**2 * r**2 / cons.c**2) - 1) * np.array([1,0,0]) # m * sqrt(gamma**2 - 1) * e_cp0
+assert omega_c * r < cons.c, "\omega_- * r too great!"
 
-print("\omega_c = {:5.2e}".format(omega_c))
-print("\omega_+ = {:5.2e}".format(omega_plus))
-print("\omega_- = {:5.2e}".format(omega_minus))
-print("\omega_z = {:5.2e}".format(omega_z))
+cp0 = m * np.sqrt( 1.0 / (1 - omega_c**2 * r**2 / cons.c**2) - 1) * np.array([1,0,0]) # m * sqrt(gamma**2 - 1) * e_cp0
+#cp0 = np.sqrt(( 200 + m**2) - m**2) * np.array([1,0,0])
 
-#~ print(r"\frac{\omega_+}{\omega_-} = {:5.2e}".format(omega_plus / omega_minus))
-#~ print(r"\frac{\omega_+}{\omega_z} = {:5.2e}".format(omega_plus / omega_z))
+print("f_c = {:5.2e} Hz".format(omega_c / 2 / np.pi))
+print("f_+ = {:5.2e} Hz".format(omega_plus / 2 / np.pi))
+print("f_- = {:5.2e} Hz".format(omega_minus / 2 / np.pi))
+print("f_z = {:5.2e} Hz".format(omega_z / 2 / np.pi))
 
-print("U = {:5.2e}".format(U0))
-print("B = {:5.2e}".format(B0))
+print(r"\frac \omega_+ \omega_- = {:5.2e}".format(omega_plus / omega_minus))
+print(r"\frac \omega_+ \omega_z = {:5.2e}".format(omega_plus / omega_z))
+
+print("U = {:5.2e} V".format(U0))
+print("B = {:4.2f} T".format(B0))
+
+print("\roh_0 = {:5.2e} m".format(roh0))
+print("cp_0 = {:5.2e} MeV".format(np.linalg.norm(cp0)))
+
+print("############################################")
+print("#              Backtracking                #")
+print("############################################")
+
+o_c = q * B0 * cons.c**2 / (m * 1e6)
+o_z = np.sqrt(q * U0 * cons.c**2 /(m * 1e6 * d**2))
+
+assert o_c**2 / 2 >= o_z**2, "\omega_c too small against \omega_z"
+
+o_p = o_c / 2 + np.sqrt(o_c**2 / 4 - o_z**2 / 2)
+o_m = o_c / 2 - np.sqrt(o_c**2 / 4 - o_z**2 / 2)
+
+assert o_m < o_z < o_p, "\omega_- < \omega_z < \omega_+ condition not fulfilled!"
+
+print("\Delta f_c = {:5.2e}".format(omega_c / o_c))
+print("\Delta f_z = {:5.2e}".format(omega_z / o_z))
+print("\Delta f_+ = {:5.2e}".format(omega_plus / o_p))
+print("\Delta f_- = {:5.2e}".format(omega_minus / o_m))
+	
+print("\\frac f_+ f_- = {:5.2e}".format(o_p / o_m))
+print("\\frac f_+ f_z = {:5.2e}".format(o_p / o_z))
+
+print("f_+ = {:5.2e} Hz".format( o_p / 2 / np.pi))
+print("f_- = {:5.2e} Hz".format( o_m / 2 / np.pi))
+print("f_z = {:5.2e} Hz".format( o_z / 2 / np.pi))
+print("f_c = {:5.2e} Hz".format( o_c / 2 / np.pi))
 
 tStart = 0
-tEnd = 1e-7
+tEnd = 3e-7
 dt = 1e-11
 
 def E_Feld(x,y,z, t):
@@ -78,6 +111,8 @@ def B_Feld(x,y,z, t):
 E = Field(E_Feld)
 B = Field(B_Feld)
 particle = Particle(r0, cp0, m, q)
+
+print(r"\beta = {:5.2e}".format(particle.getBeta()))
 
 comput = Computer(dt)
 comput.start(E, B, particle, tStart, tEnd)
