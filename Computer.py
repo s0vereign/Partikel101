@@ -35,8 +35,7 @@ class Computer:
         #velocity-verlet-algorithms, see http://www.vizgep.bme.hu/letoltesek/targyak/BMEGEVG1MOD/verlet.pdf
         r = particle.getCurrentPos() + (Constants.c * particle.getCurrentcp())/(gamma*particle.getM()) * self.dt + \
             1.0/2 * a * self.dt**2 
-               
-        #cp = particle.getCurrentcp()+F*self.dt*Constants.c;
+         
         aGes = a
         eCp = particle.getCurrentcp() / np.linalg.norm(particle.getCurrentcp());
         aP = np.dot(aGes, eCp) * eCp
@@ -45,6 +44,7 @@ class Computer:
         cp_1 = particle.getCurrentcp() + aP * self.dt * particle.getM() * gamma / Constants.c
         cp_2 = cp_1 + aV * self.dt * particle.getM() * gamma / Constants.c
         cp = cp_2 / np.linalg.norm(cp_2) * np.linalg.norm(cp_1)
+        #cp = particle.getCurrentcp()+F*self.dt*Constants.c;
         
         particle.saveField(E1[2]);
         particle.saveZ(r[2]);

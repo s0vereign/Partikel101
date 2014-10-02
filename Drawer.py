@@ -34,7 +34,7 @@ class Drawer:
         t = np.linspace(t_start, t_end, len(ekin))
         
         fig = plt.figure(figsize=(8,6));
-        gs = gridspec.GridSpec(3, 1, height_ratios=[4, 2, 2])
+        gs = gridspec.GridSpec(2, 1, height_ratios=[8, 6])
         
         ax = fig.add_subplot(gs[0], projection='3d')
         ax.plot(x,y,z,label = 'Trajectory');
@@ -54,10 +54,10 @@ class Drawer:
 #            ax.annotate('Cavity',xy = (xy1[0],xy1[1]), xytext = (xy1[0],xy1[1]+10), arrowprops=dict(facecolor='black', shrink=0.05))
 #        ax.set_ylim(0,60);
 #        
-        ax = fig.add_subplot(gs[2])
-        ax.plot(z1,E);     
-        ax.set_xlabel('$z$');
-        ax.set_ylabel('$MeV/m$');
+        #~ ax = fig.add_subplot(gs[2])
+        #~ ax.plot(z1,E);     
+        #~ ax.set_xlabel('$z$');
+        #~ ax.set_ylabel('$MeV/m$');
         
         
         plt.show()
