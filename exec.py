@@ -32,7 +32,7 @@ r = roh0 * 2./3.#m
 
 n1 =  1/3.# = omega_plus / omega_minus
 n2 =  1# = omega_plus / omega_z
-r0 = np.array([0.0,0.0,z0/2])
+r0 = np.array([0.0,0.0, z0/2.0]) # z0/2
 
 omega_plus = 1e9
 omega_minus = omega_plus/n1
@@ -42,7 +42,7 @@ omega_z = omega_plus/n2
 B0 = omega_c * m * 1e6  / ( q * cons.c**2 )
 U0 = omega_z**2 * m * 1e6 / ( q * cons.c**2 ) * d**2
 
-#assert omega_c * r < cons.c, "\omega_- * r too great!"
+assert omega_c * r < cons.c, "faster than light - well done dude :)"
 
 cp0 = m * np.sqrt( 1.0 / (1 - omega_c**2 * r**2 / cons.c**2) - 1) * np.array([1,0,0]) # m * sqrt(gamma**2 - 1) * e_cp0
 
@@ -87,9 +87,11 @@ print("f_- = {:5.2e} Hz".format( o_m / 2 / np.pi))
 print("f_z = {:5.2e} Hz".format( o_z / 2 / np.pi))
 print("f_c = {:5.2e} Hz".format( o_c / 2 / np.pi))
 
+dt = 1.0 / (max(o_m, o_p, o_z) * 100.0)
+print("dt = {:5.2e}".format(dt))
 tStart = 0
-tEnd = 5e-8
-dt = 1e-11
+tEnd = 1.0 / ( min(o_m, o_p, o_z) ) * (2 * np.pi) * 2
+print("tEnd = {:5.2e}".format(tEnd))
 
 
 def E_Feld(x,y,z, t):
