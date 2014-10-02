@@ -18,7 +18,7 @@ from Particle import Particle
 from Field    import Field
 from Constants import Constants as cons
 
-roh0 = 8e-3#m
+roh0 = 8e-1#m
 z0 = roh0 / np.sqrt(2)#m
 d = np.sqrt(1.0/2 * (z0**2 + roh0**2 / 2))
 #d = 10e-3#m
@@ -26,26 +26,23 @@ d = np.sqrt(1.0/2 * (z0**2 + roh0**2 / 2))
 m = 52e3#MeV
 q = 6
 
-r = roh0 * 2 / 3.0#m
+r = roh0 * 2./3.#m
 
-n1 = 20 # = omega_plus / omega_minus
-n2 = 2 # = omega_plus / omega_z
+n1 = 5e4 # = omega_plus / omega_minus
+n2 = 10 # = omega_plus / omega_z
+r0 = np.array([0.0,0.0,.10])
 
-r0 = np.array([1.0,1.0,1.0])
+omega_plus = 1e10
+omega_minus = omega_plus/n1
+omega_c = omega_plus + omega_minus
+omega_z = omega_plus/n2
 
-omega_plus = 1e7
-
-omega_minus = omega_plus / n1
-omega_z = omega_plus / n2
-omega_c = np.sqrt( omega_plus**2 + omega_minus**2 + omega_z**2)
-
-B0 = omega_c * m * 1e6 / (q * cons.c**2)
-U0 = omega_z**2 * d**2 * m * 1e6 / (q * cons.c**2)
+B0 = omega_c * m * 1e6  / ( q * cons.c**2 )
+U0 = omega_z**2 * m * 1e6 / ( q * cons.c**2 ) * d**2
 
 assert omega_c * r < cons.c, "\omega_- * r too great!"
 
 cp0 = m * np.sqrt( 1.0 / (1 - omega_c**2 * r**2 / cons.c**2) - 1) * np.array([1,0,0]) # m * sqrt(gamma**2 - 1) * e_cp0
-#cp0 = np.sqrt(( 200 + m**2) - m**2) * np.array([1,0,0])
 
 print("f_c = {:5.2e} Hz".format(omega_c / 2 / np.pi))
 print("f_+ = {:5.2e} Hz".format(omega_plus / 2 / np.pi))
@@ -92,12 +89,13 @@ tStart = 0
 tEnd = 3e-7
 dt = 1e-11
 
+
 def E_Feld(x,y,z, t):
     Ex = U0 / (2 * d**2) * x
     Ey = U0 / (2 * d**2) * y
     Ez = - U0 / d**2 * z
 
-    #return [0,0,Ez]
+    #return [0,0,0]
     return [Ex, Ey, Ez];
 
 def B_Feld(x,y,z, t):

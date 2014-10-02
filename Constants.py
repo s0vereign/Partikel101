@@ -29,6 +29,7 @@ class Constants:
     
     """
     
+
     rq1 = np.array([0,0.7,0]);#Q1+
     rq2 = np.array([0,0,0.7]);#Q1-
     rq3 = np.array([0,-0.7,0]);#Q2+
